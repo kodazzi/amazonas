@@ -1,0 +1,25 @@
+Carousel:
+  options:
+    table: carousels
+    timestampable: true
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255}
+    status				: {type: options, values: {0: 'Desactivo', 1: 'Activo'}, default: 0}
+    mark 				: {type: string, length: 255}
+
+Slide:
+  options:
+    table: slides
+    timestampable: true
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: false}
+    image    		    : {type: string, length: 255}
+    description    		: {type: note, length: 200, notnull: false}
+    carousel:
+      type: foreign
+      model: Carousel
+      join: { name: "carousel_id", foreignField: "id" }
+      relation: "many-to-one"
+    sequence 		    : {type: integer, length: 6, notnull: false}

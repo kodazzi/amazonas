@@ -1,0 +1,41 @@
+<script>
+$(document).ready(function(){
+    $("form#form-installation-step2").submit(function(){
+        step2(this);
+        return false;
+    });
+});
+</script>
+
+<form action="{{ build_url('installation-step2') }}" method="post" role="form" id="form-installation-step2">
+    <fieldset>
+        <div class="form-group">
+            <label for="install_project" class="">Nombre del Proyecto:</label>
+            <input type="text" name="Install[project]" id="install_project" class="form-control" placeholder="Ej: Mi Proyecto" />
+        </div>
+
+        <div class="form-group">
+            <label for="install_admin" class="">Usuario Administrador:</label>
+            <input type="text" name="Install[admin]" id="install_admin" class="form-control" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="install_email" class="">Correo Electr&oacute;nico:</label>
+            <input type="text" name="Install[email]" id="install_email" class="form-control" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="install_password" class="">Clave Administrador:</label>
+            <input type="password" name="Install[password]" id="install_password" class="form-control" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="install_confirmation" class="">Repetir Clave:</label>
+            <input type="password" name="Install[confirmation]" id="install_confirmation" class="form-control" placeholder="" />
+        </div>
+
+    </fieldset>
+    <fieldset>
+        <p class="text-center"> <button class="btn btn-primary btn-loading" type="submit" data-loading-text="Instalando...">Instalar</button> </p>
+    </fieldset>
+</form>

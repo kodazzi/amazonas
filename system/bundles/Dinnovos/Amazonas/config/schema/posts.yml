@@ -1,0 +1,27 @@
+CategoryPost:
+  options:
+    table: categories_post
+    timestampable: true
+    sluggable: [title]
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: title, length: 255, notnull: true}
+
+Post:
+  options:
+    table: posts
+    timestampable: true
+    sluggable: [title]
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: true}
+    content 		    : {type: editor}
+    status				: {type: options, values: {0: 'Desactivo', 1: 'Activo', 2: 'Borrador'}, default: 2}
+    category:
+      type: foreign
+      model: CategoryPost
+      join: { name: "category_id", foreignField: "id" }
+      relation: "many-to-one"
+      notnull: false
+    meta_description 	: {type: note, length: 200, notnull: false}
+    sequence 		    : {type: integer, length: 6, notnull: false}

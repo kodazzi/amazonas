@@ -1,0 +1,79 @@
+{% extends "amazonas.admin.twig" %}
+
+{% block stylesheet_header %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/src/upload/css/k-upload.css">
+{% endblock %}
+
+{% block javascript_header %}
+    {{ parent() }}
+    <script type="text/javascript" src="/src/upload/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/src/upload/js/k-upload.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            {{ view_title|raw }}
+            <small>Administraci&oacute;n</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ level_breadcrumb|raw }}"><i class="fa fa-dashboard"></i>{{ view_title|raw }}</a></li>
+            <li class="active">{{ here_breadcrumb|raw }}</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Agregar una imagen</h3>
+                    </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#SlideForm_image").upload({
+                                allowedTypes: "jpg,jpeg,png",
+                                returnOnlyText:false,
+                                idTarget: "SlideForm_image"
+                            });
+                        });
+                    </script>
+
+                    <form role="form" method="post" action="">
+                        <div class="box-body">
+                            <div class="row">
+                                {{ form.render()|raw }}
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+        </div>
+
+        {% for slide in slides %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="thumbnail">
+                    <img src="/upload/{{ slide.image }}" />
+                    <div class="caption">
+                        <a href="{{ build_url('@default-admin', {'controller':'Carousels/AdminSlide','action':'delete', 'param1':carousel.id, 'param2':slide.id}) }}" onclick='return confirm("Desea eliminar el slide?")' class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

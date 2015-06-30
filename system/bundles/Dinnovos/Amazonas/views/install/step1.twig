@@ -1,0 +1,65 @@
+{% extends "installation.web.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" style="padding-top: 50px;">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Bienvenido a la instalaci&oacute;n de Amazonas</h3>
+                </div>
+                <div class="panel-body" id="content-form-steps">
+
+                    <form action="" method="post" role="form" id="form-installation-step1">
+
+                        <fieldset>
+                            <div id="global-message"></div>
+
+                            <div class="form-group">
+                                <label for="install_driver" class="">Motor:</label>
+                                <select class="form-control" id="install_driver" name="Install[driver]">
+                                    <option value="pdo_mysql">Mysql</option>
+                                    <option value="mysqli">MySQLi</option>
+                                    <option value="pdo_sqlite">SQLite</option>
+                                    <option value="pdo_pgsql">PostgreSQL</option>
+                                    <option value="pdo_oci">Oracle</option>
+                                    <option value="pdo_sqlsrv">SQL Server</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="install_db" class="">Base de datos:</label>
+                                <input type="text" name="Install[db]" id="install_db" class="form-control" placeholder="Ej: mi_proyecto" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="install_user" class="">Usuario:</label>
+                                <input type="text" name="Install[user]" id="install_user" class="form-control" placeholder="Ej: root" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="install_password" class="">Clave:</label>
+                                <input type="password" name="Install[password]" id="install_password" class="form-control" placeholder="" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="install_prefix" class="">Prefijo Tablas:</label>
+                                <input type="text" name="Install[prefix]" id="install_prefix" value="as_" class="form-control" placeholder="" />
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+                            <p class="text-center"> <button class="btn btn-primary btn-loading" type="submit" data-loading-text="Instalando...">Continuar</button> </p>
+                        </fieldset>
+                        <fieldset>
+                            <p class="text-center text-info"> Por favor llene todos los campos</p>
+                        </fieldset>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

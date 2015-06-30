@@ -1,0 +1,20 @@
+.k-modal .modal-lg{
+    width: 90%;
+}
+
+.k-list-files .thumbnail{
+    cursor: pointer;
+}
+
+.k-list-files .thumbnail .caption{
+    padding: 1px;
+}
+
+.k-list-files .k-active{
+    background-color: #EDEDED;
+    border-color: #DDDDDD;
+}
+
+.k-form-upload input{
+    display: none;
+}

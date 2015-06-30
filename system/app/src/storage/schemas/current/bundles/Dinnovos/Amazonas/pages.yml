@@ -1,0 +1,35 @@
+CategoryPages:
+  options:
+    table: categories_pages
+    timestampable: true
+    sluggable: [title]
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: title, length: 255, notnull: true}
+    mark 				: {type: string, length: 255, notnull: false}
+
+Page:
+  options:
+    table: pages
+    timestampable: true
+    sluggable: [title]
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: true}
+    content 		    : {type: editor}
+    status				: {type: options, values: {0: 'Desactivo', 1: 'Activo', 2: 'Borrador'}, default: 2}
+    category:
+      type: foreign
+      model: CategoryPages
+      join: { name: "category_id", foreignField: "id" }
+      relation: "many-to-one"
+      notnull: false
+    meta_description 	: {type: note, length: 200, notnull: false}
+    sequence 		    : {type: integer, length: 6, notnull: false}
+    mark 				: {type: string, length: 255, notnull: false}
+    parent:
+      type: foreign
+      model: Page
+      join: { name: "parent_id", foreignField : "id" }
+      relation: "many-to-one-self-referencing"
+      notnull: false

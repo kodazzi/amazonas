@@ -1,0 +1,27 @@
+<div id="k-carousel-{{ carousel.id }}" class="carousel slide" data-interval="3000" data-ride="carousel">
+    <!-- Carousel indicators -->
+    <ol class="carousel-indicators">
+        {% for key, slide in slides %}
+            <li data-target="#k-carousel-{{ carousel.id }}" data-slide-to="{{ key }}" class="{{ key==0?'active':'' }}"></li>
+        {% endfor %}
+    </ol>
+    <!-- Wrapper for carousel items -->
+    <div class="carousel-inner">
+        {% for key, slide in slides %}
+            <div class="item {{ key==0?'active':'' }}">
+                <img alt="{{ slide.title }}" src="/upload/{{ slide.image }}" data-holder-rendered="true">
+                <div class="carousel-caption">
+                    <h3>{{ slide.title }}</h3>
+                    <p>{{ slide.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Carousel controls -->
+    <a class="carousel-control left" href="#k-carousel-{{ carousel.id }}" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="#k-carousel-{{ carousel.id }}" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>

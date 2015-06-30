@@ -1,0 +1,12 @@
+Block:
+  options:
+    table: blocks
+    timestampable: true
+  fields:
+    id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255}
+    content 		    : {type: editor, notnull: false}
+    mark 				: {type: string, length: 255, unique: true}
+    type				: {type: options, values: {'content': 'Contenido', 'file': 'Archivo'}, default: 'content'}
+    status				: {type: options, values: {0: 'Desactivo', 1: 'Activo'}, default: 0}
+    sequence 		    : {type: integer, length: 6, notnull: false}

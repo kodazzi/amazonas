@@ -1,0 +1,33 @@
+#ds-alert{
+    position: fixed;
+    z-index: 9999;
+    height: 60px;
+    opacity: 0;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 auto;
+}
+
+.ds-alert-success{
+    color: #006600;
+    background-color: #F2FAE4;
+    border-bottom: 1px solid #006600;
+}
+
+.ds-alert-error{
+    color: #DB1924;
+    background-color: #FFDDDD;
+    border-bottom: 1px solid #DB1924;
+}
+
+.ds-alert-information{
+    color: #206BAA;
+    background-color: #E8F5FF;
+    border-bottom: 1px solid #206BAA;
+}
+
+.ds-alert-warning{
+    color: #AF791F;
+    background-color: #FFF9E1;
+    border-bottom: 1px solid #AF791F;
+}

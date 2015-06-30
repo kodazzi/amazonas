@@ -1,0 +1,23 @@
+<div class="box-body">
+    <div class="row">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                tinymce.init({
+                    selector: "textarea.editor",
+                    plugins: [
+                        "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                        "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+                    ],
+                    toolbar1: "bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | table | bullist numlist | searchreplace link unlink anchor | preview code",
+                    menubar: false,
+                    toolbar_items_size: 'small',
+                    height: 350,
+                    language : 'es'
+                });
+            });
+        </script>
+
+        {{ form.render()|raw }}
+    </div>
+</div>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        {% block head %}
+
+            <title>{% block title %}Panel | Amazonas{% endblock %} </title>
+
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta charset="utf-8">
+            <meta name="description" content="{% block meta_description %} Proyecto con Yulois 1.0 {% endblock %}">
+            <meta name="author" content="Autor">
+
+            <!-- Responsive Metatag -->
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+            <link rel="icon" type="image/png" href="/src/default/favicon.png" />
+
+            {% block stylesheet_header %}
+                <link rel="stylesheet" type="text/css" media="screen" href="/src/bootstrap/css/bootstrap.min.css" />
+                <link rel="stylesheet" type="text/css" media="screen" href="/src/font-awesome/css/font-awesome.min.css" />
+                <link href="/src/amazonas/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+                <link href="/src/amazonas/css/skins/skin-blue.css" rel="stylesheet" type="text/css" />
+                <link href="/src/amazonas/css/admin.css" rel="stylesheet" type="text/css" media="screen">
+                <link href="/src/tools/css/k-alert.css" rel="stylesheet" type="text/css" media="screen">
+            {% endblock %}
+
+            {% block javascript_header %}
+                <script type="text/javascript" src="/src/jquery/jquery.min.1.9.1.js"></script>
+                <script type="text/javascript" src="/src/bootstrap/js/bootstrap.min.js"></script>
+                <script type="text/javascript" src="/src/tools/js/k-alert.js"></script>
+            {% endblock %}
+
+        {% endblock %}
+    </head>
+    <body class="skin-blue">
+
+        <div class="wrapper">
+
+        <header class="main-header">
+
+            <a href="{{ build_url('panel-dashboard') }}" class="logo"><b>Amazonas</b></a>
+
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown user user-menu">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+
+                                <span class="hidden-xs">Alexander Pierce</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li class="user-header">
+                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                    <p>
+                                        Alexander Pierce - Web Developer
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+
+                                <li class="user-body">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </li>
+
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+
+            <section class="sidebar">
+
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+                  <span class="input-group-btn">
+                    <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                  </span>
+                    </div>
+                </form>
+
+                <ul class="sidebar-menu">
+                    <li class="header">Opciones</li>
+
+                    <li class="treeview">
+                        <a href="#"><span>P&aacute;ginas</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ build_url('@default-admin', {controller:'Pages/Admin',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Pages/Admin',action:'new'}) }}">Nueva</a></li>
+                            <li>
+                                <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Pages/AdminCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Pages/AdminCategories',action:'new'}) }}"> Nueva</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><span>Noticias</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ build_url('@default-admin', {controller:'Posts/Admin',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Posts/Admin',action:'new'}) }}">Nueva</a></li>
+                            <li>
+                                <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Posts/AdminCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Posts/AdminCategories',action:'new'}) }}"> Nueva</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><span>Bloques</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ build_url('@default-admin', {controller:'Blocks/Admin',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Blocks/Admin',action:'new'}) }}">Nuevo</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ build_url('@default-admin', {controller:'Carousels/Admin',action:'list'}) }}"><span>Carrusel</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ build_url('@default-config', {controller:'admin',action:'list'}) }}"><span>Configuraci&oacute;n</span> </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+            <div class="content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
+
+            {% block footer %}
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    Panel de administraci&oacute;n
+                </div>
+                <strong>Copyright &copy; 2015</strong>, Amazonas es un producto de <a href="http://dinnovos.com" target="_blank">Dinnovos</a>. Todos los derechos reservados.
+            </footer>
+            {% endblock %}
+
+        </div><!-- ./wrapper -->
+
+
+        {% block javascript_footer %}
+            <script type="text/javascript" src="/src/amazonas/js/app.js"></script>
+            <script type="text/javascript" src="/src/amazonas/js/admin.js"></script>
+        {% endblock %}
+    </body>
+
+</html>

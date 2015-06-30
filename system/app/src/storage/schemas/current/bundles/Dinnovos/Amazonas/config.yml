@@ -1,0 +1,10 @@
+Configuration:
+  options:
+    table: configurations
+    timestampable: true
+  fields:
+    id					    : {type: primary, strategy: identity}
+    ds_label   			    : {type: string, length: 255}
+    ds_key	    	        : {type: string, length: 255}
+    ds_value				: {type: string, length: 255}
+    ds_help				    : {type: string, length: 255, notnull: true}
