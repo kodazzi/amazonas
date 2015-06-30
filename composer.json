@@ -1,8 +1,8 @@
 {
-    "name": "kodazzi/kodazzi",
+    "name": "kodazzi/amazonas",
     "type": "project",
-    "description": "The Kodazzi PHP framework",
-    "keywords": ["framework","kodazzi","venezuela"],
+    "description": "CMS Amazonas developed with Kodazzi",
+    "keywords": ["cms", "amazonas", "framework","kodazzi","venezuela"],
     "license": "MIT",
     "authors": [
         {
