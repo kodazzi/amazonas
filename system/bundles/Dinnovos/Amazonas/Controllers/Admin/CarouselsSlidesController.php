@@ -1,17 +1,17 @@
 <?php
 
-namespace Dinnovos\Amazonas\Controllers\Carousels;
+namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Dinnovos\Amazonas\Main\MainBundleController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class AdminSlideController extends BundleController
+class CarouselsSlidesController extends MainBundleController
 {
     protected $namespace_model = 'Dinnovos\Amazonas\Models\SlideModel';
     protected $namespace_form = 'Dinnovos\Amazonas\Forms\SlideForm';
     protected $namespace_bundle = 'Dinnovos\Amazonas';
-    protected $controller = 'Carousels/AdminSlide';
-    protected $view = 'Carousels/Admin';
+    protected $controller = 'Admin/CarouselsSlides';
+    protected $view = 'Admin/CarouselsSlides';
     protected $title = 'Carrusel';
 
     public function addAction()
@@ -35,7 +35,7 @@ class AdminSlideController extends BundleController
             $slides = $this->getDB()->model($this->namespace_model)->fetchAll(array(), 't.*', \PDO::FETCH_CLASS, array('sequence'=>'ASC'));
         }
 
-        return $this->render('Dinnovos\Amazonas:Carousels\Admin:slides', array(
+        return $this->render("{$this->namespace_bundle}:{$this->view}:slides", array(
             'carousel' => $Carousel,
             'slides' => $slides,
             'form' => $Form

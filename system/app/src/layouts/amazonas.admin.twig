@@ -52,39 +52,24 @@
                         <li class="dropdown user user-menu">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs">{{ username }} </span>
                             </a>
                             <ul class="dropdown-menu">
 
                                 <li class="user-header">
                                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        {{ username }} - {{ role }}
+                                        <small>&Uacute;ltima sesi&oacute;n {{ date_format(last_logging, 'd-m-Y') }}</small>
                                     </p>
-                                </li>
-
-                                <li class="user-body">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
                                 </li>
 
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-default btn-flat">Perfil</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{{ build_url('logout') }}" class="btn btn-default btn-flat">Salir</a>
                                     </div>
                                 </li>
                             </ul>
@@ -113,13 +98,13 @@
                     <li class="treeview">
                         <a href="#"><span>P&aacute;ginas</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url('@default-admin', {controller:'Pages/Admin',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url('@default-admin', {controller:'Pages/Admin',action:'new'}) }}">Nueva</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Pages',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Pages',action:'new'}) }}">Nueva</a></li>
                             <li>
                                 <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ build_url('@default-admin', {controller:'Pages/AdminCategories',action:'list'}) }}"> Lista</a></li>
-                                    <li><a href="{{ build_url('@default-admin', {controller:'Pages/AdminCategories',action:'new'}) }}"> Nueva</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Admin/PagesCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Admin/PagesCategories',action:'new'}) }}"> Nueva</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -127,13 +112,13 @@
                     <li class="treeview">
                         <a href="#"><span>Noticias</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url('@default-admin', {controller:'Posts/Admin',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url('@default-admin', {controller:'Posts/Admin',action:'new'}) }}">Nueva</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Posts',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Posts',action:'new'}) }}">Nueva</a></li>
                             <li>
                                 <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ build_url('@default-admin', {controller:'Posts/AdminCategories',action:'list'}) }}"> Lista</a></li>
-                                    <li><a href="{{ build_url('@default-admin', {controller:'Posts/AdminCategories',action:'new'}) }}"> Nueva</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Admin/PostsCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url('@default-admin', {controller:'Posts/PostsCategories',action:'new'}) }}"> Nueva</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -141,15 +126,12 @@
                     <li class="treeview">
                         <a href="#"><span>Bloques</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url('@default-admin', {controller:'Blocks/Admin',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url('@default-admin', {controller:'Blocks/Admin',action:'new'}) }}">Nuevo</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Blocks',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin', {controller:'Admin/Blocks',action:'new'}) }}">Nuevo</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="{{ build_url('@default-admin', {controller:'Carousels/Admin',action:'list'}) }}"><span>Carrusel</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="{{ build_url('@default-config', {controller:'admin',action:'list'}) }}"><span>Configuraci&oacute;n</span> </a>
+                        <a href="{{ build_url('@default-admin', {controller:'Admin/Carousels',action:'list'}) }}"><span>Carrusel</span></a>
                     </li>
                 </ul>
             </section>
@@ -168,8 +150,7 @@
             </footer>
             {% endblock %}
 
-        </div><!-- ./wrapper -->
-
+        </div>
 
         {% block javascript_footer %}
             <script type="text/javascript" src="/src/amazonas/js/app.js"></script>

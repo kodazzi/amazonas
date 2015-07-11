@@ -54,6 +54,7 @@ body {
     margin-bottom: 50px;
 }
 
-p{
-    color: #ffffff;
+.carousel .item{
+    height: 350px;
+    background: #333;
 }

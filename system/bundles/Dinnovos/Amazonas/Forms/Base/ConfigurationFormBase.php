@@ -23,9 +23,9 @@ Class ConfigurationFormBase extends \Kodazzi\Form\FormBuilder
 	{
 		$this->setNameModel('Dinnovos\Amazonas\Models\ConfigurationModel');
 
- 		$this->setWidget('ds_label', new \Kodazzi\Form\Fields\String());
- 		$this->setWidget('ds_key', new \Kodazzi\Form\Fields\String());
- 		$this->setWidget('ds_value', new \Kodazzi\Form\Fields\String());
- 		$this->setWidget('ds_help', new \Kodazzi\Form\Fields\String());
+ 		$this->setWidget('title', new \Kodazzi\Form\Fields\String());
+ 		$this->setWidget('tag', new \Kodazzi\Form\Fields\String());
+ 		$this->setWidget('content', new \Kodazzi\Form\Fields\String());
+ 		$this->setWidget('help', new \Kodazzi\Form\Fields\String());
 	}
 }

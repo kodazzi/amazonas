@@ -1,16 +1,16 @@
 <?php
 
-namespace Dinnovos\Amazonas\Controllers\Posts;
+namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Dinnovos\Amazonas\Main\MainBundleController;
 
-class AdminController extends BundleController
+class PostsController extends MainBundleController
 {
     protected $namespace_model = 'Dinnovos\Amazonas\Models\PostModel';
     protected $namespace_form = 'Dinnovos\Amazonas\Forms\PostForm';
     protected $namespace_bundle = 'Dinnovos\Amazonas';
-    protected $controller = 'Posts/Admin';
-    protected $view = 'Posts/Admin';
+    protected $controller = 'Admin/Posts';
+    protected $view = 'Admin/Posts';
     protected $title = 'Noticias';
 
     protected  function saveForm(\Kodazzi\Form\FormBuilder $Form)

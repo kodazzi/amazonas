@@ -1,15 +1,15 @@
 <?php
 
-namespace Dinnovos\Amazonas\Controllers\Posts;
+namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Dinnovos\Amazonas\Main\MainBundleController;
 
-class AdminCategoriesController extends BundleController
+class PostsCategoriesController extends MainBundleController
 {
     protected $namespace_model = 'Dinnovos\Amazonas\Models\CategoryPostModel';
     protected $namespace_form = 'Dinnovos\Amazonas\Forms\CategoryPostForm';
     protected $namespace_bundle = 'Dinnovos\Amazonas';
-    protected $controller = 'Posts/AdminCategories';
-    protected $view = 'Posts/AdminCategories';
+    protected $controller = 'Admin/PostsCategories';
+    protected $view = 'Admin/PostsCategories';
     protected $title = 'Categor&iacute;as';
 }

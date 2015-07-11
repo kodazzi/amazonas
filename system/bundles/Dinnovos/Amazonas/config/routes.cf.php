@@ -11,10 +11,24 @@
 use Symfony\Component\Routing\Route;
 
 /***************************************** Installation ******************************************/
+/*
 $routes->add(
     'Install',
     new Route('/', array( 'controller' => 'Dinnovos\Amazonas:Install:step1' ))
 );
+*/
+
+$routes->add(
+    'homepage',
+    new Route('/', array( 'controller' => 'Dinnovos\Amazonas:Home:index' ))
+);
+
+$routes->add(
+    'page-show',
+    new Route("/pagina/{slug}", array('controller' => 'Dinnovos\Amazonas:Page:show'))
+);
+
+/****************************************** Install ************************************************/
 
 $routes->add(
     'installation-step2',
@@ -22,35 +36,31 @@ $routes->add(
 );
 
 /******************************************* Panel ************************************************/
+
 $routes->add(
-    'panel-login',
-    new Route('/admin/login', array('controller' => 'Dinnovos\Amazonas:Session:login'))
+    'login',
+    new Route('/login', array('controller' => 'Dinnovos\Amazonas:Session:login'))
+);
+
+$routes->add(
+    'logout',
+    new Route('/logout', array('controller' => 'Dinnovos\Amazonas:Session:logout'))
+);
+
+$routes->add(
+    'forbidden',
+    new Route('/forbidden', array('controller' => 'Dinnovos\Amazonas:Session:forbidden'))
 );
 
 $routes->add(
     'panel-dashboard',
-    new Route('/admin/dashboard', array('controller' => 'Dinnovos\Amazonas:Dashboard:index'))
-);
-
-// --- Paginas ----
-$routes->add(
-    'page-show',
-    new Route("/pagina/{slug}", array('controller' => 'Dinnovos\Amazonas:Page:show'))
+    new Route('/panel/dashboard', array('controller' => 'Dinnovos\Amazonas:Admin/Dashboard:index'))
 );
 
 $routes->add(
     '@default-admin',
     new Route(
-        '/admin/{controller}/{action}/{param1}/{param2}/{param3}/{param4}/{param5}',
-        array('_bundle' => 'Dinnovos\Amazonas', 'param1' => null, 'param2' => null, 'param3' => null, 'param4' => null, 'param5' => null)
-    )
-);
-
-// --- Config ----
-$routes->add(
-    '@default-config',
-    new Route(
-        '/config/{controller}/{action}/{param1}/{param2}/{param3}/{param4}/{param5}',
+        '/panel/{controller}/{action}/{param1}/{param2}/{param3}/{param4}/{param5}',
         array('_bundle' => 'Dinnovos\Amazonas', 'param1' => null, 'param2' => null, 'param3' => null, 'param4' => null, 'param5' => null)
     )
 );

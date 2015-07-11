@@ -14,8 +14,8 @@ Slide:
     timestampable: true
   fields:
     id					: {type: primary, strategy: identity}
-    title				: {type: string, length: 255, notnull: false}
-    image    		    : {type: string, length: 255}
+    title				: {type: string, length: 255}
+    image    		    : {type: string, length: 255,  notnull: false}
     description    		: {type: note, length: 200, notnull: false}
     carousel:
       type: foreign

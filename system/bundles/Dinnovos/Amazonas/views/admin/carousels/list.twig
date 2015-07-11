@@ -56,7 +56,7 @@
                                     <td width="11%" class="text-center">
                                         <a href="{{ build_url('@default-admin', {'controller':view_controller,'action':'edit','param1':item.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         <a href="{{ build_url('@default-admin', {'controller':view_controller,'action':'delete','param1':item.id}) }}"><i class="fa fa-remove text-danger"></i></a>
-                                        <a href="{{ build_url('@default-admin', {'controller':'Carousels/AdminSlide','action':'add','param1':item.id}) }}"><i class="fa fa-picture-o"></i></a>
+                                        <a href="{{ build_url('@default-admin', {'controller':'Admin/CarouselsSlides','action':'add','param1':item.id}) }}"><i class="fa fa-picture-o"></i></a>
                                     </td>
                                 </tr>
                             {% else %}

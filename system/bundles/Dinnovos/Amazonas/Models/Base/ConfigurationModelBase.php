@@ -6,7 +6,7 @@ namespace Dinnovos\Amazonas\Models\Base;
 Class ConfigurationModelBase
 {
 	const table = 'as_configurations';
-	const title = 'ds_label';
+	const title = 'title';
 	const primary = 'id';
 	const hasTimestampable = true;
 

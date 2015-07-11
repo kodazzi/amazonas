@@ -9,9 +9,11 @@
     <div class="carousel-inner">
         {% for key, slide in slides %}
             <div class="item {{ key==0?'active':'' }}">
-                <img alt="{{ slide.title }}" src="/upload/{{ slide.image }}" data-holder-rendered="true">
+                {% if slide.image %}
+                    <img alt="{{ slide.title }}" src="/upload/{{ slide.image }}" data-holder-rendered="true">
+                {% endif %}
                 <div class="carousel-caption">
-                    <h3>{{ slide.title }}</h3>
+                    <h2>{{ slide.title }}</h2>
                     <p>{{ slide.description }}</p>
                 </div>
             </div>

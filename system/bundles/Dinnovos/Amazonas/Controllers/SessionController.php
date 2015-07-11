@@ -32,45 +32,70 @@ class SessionController extends BundleController
                 // Verifica en la base de datos.
                 $User = $this->validateUser($user, $password);
 
-                if( $User )
+                if($User)
                 {
-                    $this->getView()->msgSuccess($I18n->get('amazonas_config.welcome')." {$User->first_name} {$User->last_name}");
+                    $this->getView()->msgSuccess($I18n->get('user.welcome')." {$User->first_name} {$User->last_name}");
 
                     return $this->redirectResponse($this->buildUrl('panel-dashboard'));
                 }
                 else
                 {
-                    $errors['global'] = $I18n->get('user.login_failed');
+                    $this->getView()->msgSuccess($I18n->get('user.login_failed'));
                 }
             }
         }
 
-        return $this->render('Dinnovos\Amazonas:Session:login', array(
+        return $this->render('Dinnovos\Amazonas:Admin/Session:login', array(
             'errors' => $errors
         ));
 	}
 
+    public function logoutAction()
+    {
+        $this->getUserCardManager()->clear();
+
+        return $this->redirectResponse($this->buildUrl('login'));
+    }
+
+    public function forbiddenAction()
+    {
+        return $this->render('Dinnovos\Amazonas:Admin/Session:forbidden');
+    }
+
     private function validateUser($user, $password)
     {
-        $password = $this->getUser()->encript($password);
-
-        $User = $this->getUser();
+        $password = $this->getSession()->encript($password);
 
         $where = array(
             'login'     => $user,
             'password'  => $password,
             'status'    => 1,
+            'admin'     => 1
         );
 
         $UserModel = \Service::get('db')->model('Dinnovos\Amazonas\Models\UserModel')->fetch($where);
 
         if($UserModel)
         {
-            $User->set('user_id',          $UserModel->id);
-            $User->set('email',            $UserModel->email);
-            $User->set('first_name',       $UserModel->first_name);
-            $User->set('last_name',        $UserModel->last_name);
-            $User->set('user_agent',       $User->createTokenSession());
+            $UserCardManager = $this->getUserCardManager();
+
+            $Card = $UserCardManager->getNewCard();
+            $Card->setUser($UserModel->email);
+            $Card->setRole('ADMIN');
+            $Card->setAttributes(array(
+               'id'             => $UserModel->id,
+               'username'       => $UserModel->login,
+               'first_name'     => $UserModel->first_name,
+               'last_name'      => $UserModel->last_name,
+               'user_agent'     => $this->getSession()->createTokenSession(),
+               'last_logging'   => $UserModel->last_logging
+            ));
+
+            $UserCardManager->add($Card);
+
+            $UserModel->last_logging = $this->getTimestamp();
+
+            \Service::get('db')->model('Dinnovos\Amazonas\Models\UserModel')->save($UserModel);
         }
 
         return $UserModel;

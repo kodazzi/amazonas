@@ -1,0 +1,21 @@
+{% extends "layout.web.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                T&iacute;tulo del sitio web
+            </h1>
+        </div>
+
+        {{ show_block('services-home')|raw }}
+    </div>
+
+    <hr>
+
+    <div class="well">
+        <div class="row">
+            {{ show_block('call-action-home')|raw }}
+        </div>
+    </div>
+{% endblock %}

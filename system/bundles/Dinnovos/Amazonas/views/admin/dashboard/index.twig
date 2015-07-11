@@ -26,27 +26,6 @@
 
     <section class="content">
 
-        <script>
-            $(document).ready(function() {
-                $(".k-upload").upload({
-                    actionDisplayFiles:"{{ build_url('@default-admin', {'controller':'Upload','action':'display'}) }}",
-                    actionUpload:"{{ build_url('@default-admin', {'controller':'Upload','action':'upload'}) }}",
-                    allowedTypes: "jpg,jpeg,png",
-                    returnOnlyText:false,
-                    idTarget: "gallery",
-                    onSelect: function(file){
-                        alert(file.path);
-                    }
-                });
-            });
-        </script>
-
-        <button type="button" class="btn btn-primary k-upload" data-div-id="k-modal">Upload</button>
-
-        <input type="text" id="gallery" name="file">
-
-        {{ show_carousel('main')|raw }}
-
         <div class="row">
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
