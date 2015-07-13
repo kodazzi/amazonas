@@ -291,7 +291,7 @@ class InstallController extends BundleController
         // Limpia la sesion
         $this->getSession()->clear();
 
-        return array('status' => 'ok', 'url' => $this->buildUrl('panel-login'));
+        return array('status' => 'ok', 'url' => $this->buildUrl('login'));
     }
 
     private function createFilesConfig()
@@ -299,11 +299,13 @@ class InstallController extends BundleController
         $fs = new Filesystem();
         $config = $this->getSession()->get('config');
 
-        $config_db = $this->getRender('Amazonas\Installation:Install:config_db', $config);
-        $config_project = $this->getRender('Amazonas\Installation:Install:config_project', array('token' => sha1($this->getTimestamp())));
+        $config_db = $this->getRender('Dinnovos\Amazonas:Install:config_db', $config);
+        $config_project = $this->getRender('Dinnovos\Amazonas:Install:config_app', array('token' => sha1($this->getTimestamp())));
+        $config_routes = $this->getRender('Dinnovos\Amazonas:Install:config_routes');
 
         $fs->dumpFile(YS_APP.'config/db.cf.php', $config_db);
-        $fs->dumpFile(YS_APP.'config/project.cf.php', $config_project);
+        $fs->dumpFile(YS_APP.'config/app.cf.php', $config_project);
+        $fs->dumpFile(YS_APP.'config/routes.cf.php', $config_routes);
 
         // Se carga nuevamente la configuracion de Kodazzi
         $ConfigInstance = \Service::get('config');
@@ -322,10 +324,10 @@ class InstallController extends BundleController
     private function insertNewData($config)
     {
         $this->getDB()->model('Dinnovos\Amazonas\Models\ConfigurationModel')->insert(array(
-            'ds_label'  => 'Proyecto',
-            'ds_key'    => 'DS-NAME-PROYECT',
-            'ds_value'  => $config['project'],
-            'ds_help'   => 'Nombre del proyecto',
+            'title'     => 'Proyecto',
+            'tag'       => 'DS-NAME-PROYECT',
+            'content'   => $config['project'],
+            'help'      => 'Nombre del proyecto',
             'created'   => $this->getTimestamp(),
             'updated'   => $this->getTimestamp(),
         ));
@@ -346,7 +348,7 @@ class InstallController extends BundleController
 
         $this->getDB()->model('Dinnovos\Amazonas\Models\CategoryPagesModel')->insert(array(
             'title'    => 'Primera Categor&iacute;a',
-            'code'     => 'FIRST-CATEGORY',
+            'mark'     => 'FIRST-CATEGORY',
             'slug'     => 'primera-categoria',
             'created'  => $this->getTimestamp(),
             'updated'  => $this->getTimestamp(),
@@ -357,6 +359,7 @@ class InstallController extends BundleController
             'content'  => 'Cotenido de prueba',
             'status'   => '1',
             'sequence' => '1',
+            'mark'     => 'pagina-prueba',
             'slug'     => 'pagina-de-prueba',
             'created'  => $this->getTimestamp(),
             'updated'  => $this->getTimestamp(),

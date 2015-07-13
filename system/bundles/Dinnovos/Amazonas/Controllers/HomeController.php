@@ -2,7 +2,7 @@
 
 namespace Dinnovos\Amazonas\Controllers;
 
-use Dinnovos\Site\Main\BundleController;
+use Dinnovos\Amazonas\Main\BundleController;
 
 class HomeController extends BundleController
 {

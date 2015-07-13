@@ -73,14 +73,15 @@ function step2(f){
 
             if(typeof (json.status) != "undefined"){
                 if(json.status == 'ok'){
-                    $("#content-form-steps").html(json.html);
+                    // redirecciona al login
+                    window.location = json.url;
                 }else{
                     if(typeof (json.msg) != "undefined"){
                         $("#global-message").html('<p class="alert alert-danger">'+json.msg+'</p>');
                     }
 
                     if(typeof (json.fields) != "undefined"){
-                        $( json.fields ).each(function(i, field){
+                        $(json.fields).each(function(i, field){
                             var parent = $('#'+field.id).parent();
                             var e = parent.find('p.text-danger');
 

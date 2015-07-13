@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the Kodazzi Framework.
+ * This file is part of the Yulois Framework.
  *
- * (c) Jorge Gaitan <jgaitan@kodazzi.com>
+ * (c) Jorge Gaitan <info.yulois@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,11 +10,11 @@
 
 return array(
 
-    'project'			    => 'Proyecto Kodazzi1.0',
+    'project'			    => '',
 
     'charset'			    => 'UTF-8',
 
-    'token'				    => '9gyfe3b08sffd6f7s7gfhj86b184936d',
+    'token'				    => '75c559700749a6e7348f79a55b0b6e716b8739cd',
 
     'enabled_path_themes'   => true,
 
