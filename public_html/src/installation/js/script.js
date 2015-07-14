@@ -7,6 +7,8 @@ $(document).ready(function(){
 
 function step1(f){
     var url = $(f).attr('action');
+    var btn = $(f).find('button');
+    btn.button('loading');
 
     $.ajax({
         url: url,
@@ -48,6 +50,8 @@ function step1(f){
                 }
             }
 
+            btn.button('reset');
+
             //$('form#ds-form-login')[0].reset();
             //btn.button('reset');
         },
@@ -60,6 +64,9 @@ function step1(f){
 
 function step2(f){
     var url = $(f).attr('action');
+    var btn = $(f).find('button');
+
+    btn.button('loading');
 
     $.ajax({
         url: url,
@@ -103,7 +110,7 @@ function step2(f){
             }
 
             //$('form#ds-form-login')[0].reset();
-            //btn.button('reset');
+            btn.button('reset');
         },
         error: function(){
             $("div#ds-msg-global").html('<p class="alert alert-danger">Ocurrio un error, por favor intente mas tarde.</p>');
