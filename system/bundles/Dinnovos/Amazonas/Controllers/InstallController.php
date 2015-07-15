@@ -332,15 +332,13 @@ class InstallController extends BundleController
             'updated'   => $this->getTimestamp(),
         ));
 
-        $this->getDB()->model('Dinnovos\Amazonas\Models\UserModel')->insert(array(
+        $this->getDB()->model('Dinnovos\Amazonas\Models\AdminModel')->insert(array(
             'first_name'    => 'Administrator',
             'last_name'     => 'Administrator',
-            'email'         => 'info@domain.com',
-            'login'         => $config['admin'],
+            'email'         => $config['email'],
+            'username'      => $config['admin'],
             'password'      => $this->getSession()->encript( $config['password'] ),
-            'admin'         => '1',
-            'email_confirm' => '1',
-            'accept_terms'  => '1',
+            'super_admin'   => '1',
             'status'        => '1',
             'created'       => $this->getTimestamp(),
             'updated'       => $this->getTimestamp(),

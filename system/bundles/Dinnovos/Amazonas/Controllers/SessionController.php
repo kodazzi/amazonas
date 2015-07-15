@@ -14,12 +14,12 @@ class SessionController extends BundleController
 
         if(count($post))
         {
-            $user = (array_key_exists('_user', $post) && $post['_user'] != '') ? $post['_user'] : null;
+            $username = (array_key_exists('_username', $post) && $post['_username'] != '') ? $post['_username'] : null;
             $password = (array_key_exists('_password', $post) && $post['_password'] != '') ? $post['_password'] : null;
 
-            if( !$user )
+            if( !$username )
             {
-                $errors['_user'] = $I18n->get('user.user_required');
+                $errors['_username'] = $I18n->get('user.user_required');
             }
 
             if( !$password )
@@ -30,7 +30,7 @@ class SessionController extends BundleController
             if(count($errors) == 0)
             {
                 // Verifica en la base de datos.
-                $User = $this->validateUser($user, $password);
+                $User = $this->validateUser($username, $password);
 
                 if($User)
                 {
@@ -62,18 +62,19 @@ class SessionController extends BundleController
         return $this->render('Dinnovos\Amazonas:Admin/Session:forbidden');
     }
 
-    private function validateUser($user, $password)
+    private function validateUser($username, $password)
     {
         $password = $this->getSession()->encript($password);
+        $Model = \Service::get('db')->model('Dinnovos\Amazonas\Models\AdminModel');
 
         $where = array(
-            'login'     => $user,
-            'password'  => $password,
-            'status'    => 1,
-            'admin'     => 1
+            'username'      => $username,
+            'password'      => $password,
+            'status'        => 1,
+            'super_admin'   => 1
         );
 
-        $UserModel = \Service::get('db')->model('Dinnovos\Amazonas\Models\UserModel')->fetch($where);
+        $UserModel = $Model->fetch($where);
 
         if($UserModel)
         {
@@ -84,7 +85,7 @@ class SessionController extends BundleController
             $Card->setRole('ADMIN');
             $Card->setAttributes(array(
                'id'             => $UserModel->id,
-               'username'       => $UserModel->login,
+               'username'       => $UserModel->username,
                'first_name'     => $UserModel->first_name,
                'last_name'      => $UserModel->last_name,
                'user_agent'     => $this->getSession()->createTokenSession(),
@@ -95,7 +96,7 @@ class SessionController extends BundleController
 
             $UserModel->last_logging = $this->getTimestamp();
 
-            \Service::get('db')->model('Dinnovos\Amazonas\Models\UserModel')->save($UserModel);
+            $Model->save($UserModel);
         }
 
         return $UserModel;

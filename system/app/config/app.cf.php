@@ -14,7 +14,7 @@ return array(
 
     'charset'			    => 'UTF-8',
 
-    'token'				    => '75c559700749a6e7348f79a55b0b6e716b8739cd',
+    'token'				    => 'fe6fdd4110230216bbbf58779f0a1a2bf4b5b2ee',
 
     'enabled_path_themes'   => true,
 

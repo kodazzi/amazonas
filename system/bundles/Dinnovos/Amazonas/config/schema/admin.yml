@@ -1,20 +1,16 @@
-User:
+Admin:
   options:
-    table: users
+    table: admins
     timestampable: true
   fields:
     id					    : {type: primary, strategy: identity}
     first_name			    : {type: string, length: 255, notnull: true}
     last_name		        : {type: string, length: 255, notnull: true}
     email				    : {type: email, length: 100, unique: true}
-    login				    : {type: login, length: 100, unique: true}
+    username				: {type: login, length: 100, unique: true}
     password			    : {type: password, length: 255}
-    admin                   : {type: options, values: {0: SI, 1: No}, default: 0}
-    token_email			    : {type: string, length: 255, notnull: false}
-    token_email_created	    : {type: datetime, notnull: false}
+    super_admin             : {type: options, values: {0: SI, 1: No}, default: 0}
     token_forgotten			: {type: string, length: 255, notnull: false}
     token_forgotten_created	: {type: datetime, notnull: false}
-    email_confirm	        : {type: options, values: {0: "NO", 1: "SI"}, default: 1}
     last_logging	        : {type: datetime, notnull: false}
-    accept_terms			: {type: options, values: {0: "NO", 1: "SI"}, default: 0}
     status      		    : {type: options, values: {0: Desactivo, 1: Activo, 2: Espera}, default: 2}
