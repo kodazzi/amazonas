@@ -54,7 +54,7 @@ class CarouselsSlidesController extends MainBundleController
         {
             $this->getDB()->model($this->namespace_model)->delete(array('id'=>$id_slide));
 
-            return $this->redirectResponse( $this->buildUrl('@default-admin', array('controller'=> $this->controller, 'action'=>'add', 'param1'=>$id_carousel)) );
+            return $this->redirectResponse( $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'add', 'param1'=>$id_carousel)) );
         }
     }
 
@@ -71,7 +71,7 @@ class CarouselsSlidesController extends MainBundleController
                 if( $result )
                 {
                     $View->msgSuccess('El registro fue almacenado correctamente.');
-                    return $this->redirectResponse( $this->buildUrl('@default-admin', array('controller'=> $this->controller, 'action'=>'add', 'param1'=>$id_carousel)) );
+                    return $this->redirectResponse( $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'add', 'param1'=>$id_carousel)) );
                 }
             }
 

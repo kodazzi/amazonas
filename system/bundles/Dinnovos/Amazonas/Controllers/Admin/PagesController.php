@@ -38,7 +38,7 @@ class PagesController extends MainBundleController
                 {
                     $View->msgSuccess('El registro fue almacenado correctamente.');
 
-                    return $this->redirectResponse( $this->buildUrl('@default-admin', array('controller'=> $this->controller, 'action'=>'list')) );
+                    return $this->redirectResponse( $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')) );
                 }
             }
 

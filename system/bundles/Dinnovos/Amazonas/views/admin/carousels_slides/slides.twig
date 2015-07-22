@@ -67,7 +67,7 @@
                 <div class="thumbnail">
                     <img src="/upload/{{ slide.image }}" />
                     <div class="caption">
-                        <a href="{{ build_url('@default-admin', {'controller':'Carousels/AdminSlide','action':'delete', 'param1':carousel.id, 'param2':slide.id}) }}" onclick='return confirm("Desea eliminar el slide?")' class="btn btn-danger btn-sm">Eliminar</a>
+                        <a href="{{ build_url(default_route, {'controller':'Carousels/AdminSlide','action':'delete', 'param1':carousel.id, 'param2':slide.id}) }}" onclick='return confirm("Desea eliminar el slide?")' class="btn btn-danger btn-sm">Eliminar</a>
                     </div>
                 </div>
             </div>

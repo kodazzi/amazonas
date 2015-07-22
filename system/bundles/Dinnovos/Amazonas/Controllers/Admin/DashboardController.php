@@ -16,6 +16,7 @@ class DashboardController extends MainBundleController
             'last_name'         => $UserCard->getAttribute('last_name'),
             'role'              => $UserCard->getRole(),
             'last_logging'      => $UserCard->getAttribute('last_logging'),
+            'default_route'     => $this->default_route
         ));
     }
 

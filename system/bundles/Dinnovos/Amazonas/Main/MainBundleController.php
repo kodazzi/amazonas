@@ -15,6 +15,7 @@ class MainBundleController extends Controller
     protected $view = '';
     protected $title = '';
     protected $breadcrumb = 'Aqu&iacute;';
+    protected $default_route = '@default-admin';
 
     public function preAction()
     {
@@ -24,13 +25,14 @@ class MainBundleController extends Controller
 
         $this->getView()->set(array(
             'here_breadcrumb'   => $this->breadcrumb,
-            'level_breadcrumb'  => $this->buildUrl('@default-admin', array('controller'=> $this->controller, 'action'=>'list')),
+            'level_breadcrumb'  => $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')),
             'view_title'        => $this->title,
             'view_controller'   => $this->controller,
             'username'          => $UserCard->getAttribute('username'),
             'first_name'        => $UserCard->getAttribute('first_name'),
             'last_name'         => $UserCard->getAttribute('last_name'),
             'role'              => $UserCard->getRole(),
+            'default_route'     => $this->default_route
         ));
     }
 
@@ -86,7 +88,7 @@ class MainBundleController extends Controller
         {
             \Service::get('db')->model($this->namespace_model)->delete(array('id'=>$id));
 
-            return $this->redirectResponse( $this->buildUrl('@default-admin', array('bundle'=>'pages', 'controller'=> $this->controller, 'action'=>'list')) );
+            return $this->redirectResponse( $this->buildUrl($this->default_route, array('bundle'=>'pages', 'controller'=> $this->controller, 'action'=>'list')) );
         }
     }
 
@@ -103,7 +105,7 @@ class MainBundleController extends Controller
                 if( $result )
                 {
                     $View->msgSuccess('El registro fue almacenado correctamente.');
-                    return $this->redirectResponse( $this->buildUrl('@default-admin', array('controller'=> $this->controller, 'action'=>'list')) );
+                    return $this->redirectResponse( $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')) );
                 }
             }
 
