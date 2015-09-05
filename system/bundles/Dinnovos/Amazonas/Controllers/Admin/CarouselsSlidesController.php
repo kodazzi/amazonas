@@ -58,7 +58,7 @@ class CarouselsSlidesController extends MainBundleController
         }
     }
 
-    protected  function saveFormSlide(\Kodazzi\Form\FormBuilder $Form, $id_carousel)
+    protected function saveFormSlide(\Kodazzi\Form\FormBuilder $Form, $id_carousel)
     {
         $View = $this->getView();
 
