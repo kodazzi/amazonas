@@ -5,9 +5,10 @@ namespace Dinnovos\Amazonas\Main;
 use Kodazzi\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class MainBundleController extends Controller
+class AdminBundleController extends Controller
 {
     protected $namespace_model = '';
+    protected $namespace_model_translation = '';
     protected $namespace_form = '';
     protected $namespace_bundle = '';
     protected $controller = '';
@@ -21,7 +22,7 @@ class MainBundleController extends Controller
     {
         $this->action = $this->getParameters('action');
 
-        $UserCard = $this->getUserCardManager()->get();
+        $UserCard = $this->getUserCardManager()->getCard();
 
         $this->getView()->set(array(
             'here_breadcrumb'   => $this->breadcrumb,
@@ -38,7 +39,16 @@ class MainBundleController extends Controller
 
     public function listAction()
     {
-        $items = $this->getDB()->model($this->namespace_model)->fetchAll();
+        if($this->namespace_model_translation)
+        {
+            $items = $this->getDB()->model($this->namespace_model)
+                                    ->join($this->namespace_model_translation, 'b')
+                                    ->fetchAll();
+        }
+        else
+        {
+            $items = $this->getDB()->model($this->namespace_model)->fetchAll();
+        }
 
         return $this->render("{$this->namespace_bundle}:{$this->view}:{$this->action}", array(
             'items'=> $items
@@ -115,5 +125,18 @@ class MainBundleController extends Controller
         $View->set(array(
             'form' =>$Form
         ));
+    }
+
+    protected function fetchAllTranslation($namespace, $lang = null, $where = array())
+    {
+        echo "<pre>";
+        var_dump($namespace);
+        echo "</pre>";
+        exit;
+    }
+
+    protected function fetchTranslation($namespace, $lang = null, $where = array())
+    {
+
     }
 }

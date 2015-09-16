@@ -2,13 +2,13 @@
 
 namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\MainBundleController;
+use Dinnovos\Amazonas\Main\AdminBundleController;
 
-class DashboardController extends MainBundleController
+class DashboardController extends AdminBundleController
 {
     public function preAction()
     {
-        $UserCard = $this->getUserCardManager()->get();
+        $UserCard = $this->getUserCardManager()->getCard();
 
         $this->getView()->set(array(
             'username'          => $UserCard->getAttribute('username'),

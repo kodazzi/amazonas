@@ -11,6 +11,7 @@
 namespace Dinnovos\Amazonas\Providers;
 
 use Kodazzi\Container\ServiceProviderInterface;
+use Kodazzi\Backing\Alias;
 
 class AmazonasProviders implements ServiceProviderInterface
 {
@@ -28,23 +29,23 @@ class AmazonasProviders implements ServiceProviderInterface
 
     private function alias()
     {
-        \Kodazzi\Backing\Alias::set('Page', 'Dinnovos\Amazonas\Services\PageService');
-        \Kodazzi\Backing\Alias::set('Post', 'Dinnovos\Amazonas\Services\PostService');
-        \Kodazzi\Backing\Alias::set('Block', 'Dinnovos\Amazonas\Services\BlockService');
-        \Kodazzi\Backing\Alias::set('Carousel', 'Dinnovos\Amazonas\Services\CarouselService');
+        Alias::set('Page', 'Dinnovos\Amazonas\Services\PageService');
+        Alias::set('Post', 'Dinnovos\Amazonas\Services\PostService');
+        Alias::set('Block', 'Dinnovos\Amazonas\Services\BlockService');
+        Alias::set('Carousel', 'Dinnovos\Amazonas\Services\CarouselService');
     }
 
     private function functionsView()
     {
-        \Service::get('view')->addFunction('show_page', function($where = array()){
+        \Service::get('view')->addFunction('page', function($where = array()){
             return \Page::showContent($where);
         });
 
-        \Service::get('view')->addFunction('show_block', function($where = array()){
+        \Service::get('view')->addFunction('block', function($where = array()){
             return \Block::showContent($where);
         });
 
-        \Service::get('view')->addFunction('show_carousel', function($where = array()){
+        \Service::get('view')->addFunction('carousel', function($where = array()){
             return \Carousel::show($where);
         });
     }

@@ -18,7 +18,7 @@ class PageService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
         return self::_page($where, $fields, $typeFetch, $order);
@@ -28,7 +28,7 @@ class PageService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
         return self::_pages($where, $fields, $typeFetch, $order);
@@ -38,7 +38,7 @@ class PageService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
         $block = self::_page($where);

@@ -1,0 +1,8 @@
+Language:
+  options:
+    table: languages
+  fields:
+    id			: {type: primary, strategy: identity}
+    name		: {type: string, length: 50}
+    code		: {type: string, length: 5}
+    by_default  : {type: integer, length: 1}
