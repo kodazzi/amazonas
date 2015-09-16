@@ -21,7 +21,7 @@ class CarouselService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
         $carousel = self::_carousel($where);

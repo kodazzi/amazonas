@@ -28,7 +28,7 @@ class BlockService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
         $block = self::_block($where);

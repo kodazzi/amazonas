@@ -5,6 +5,6 @@ Configuration:
   fields:
     id					: {type: primary, strategy: identity}
     title   			: {type: string, length: 255}
-    tag	    	        : {type: string, length: 255}
     content				: {type: string, length: 255}
+    label	    	    : {type: string, length: 255}
     help				: {type: string, length: 255, notnull: true}

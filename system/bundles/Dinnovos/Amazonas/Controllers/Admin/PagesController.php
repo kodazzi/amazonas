@@ -2,11 +2,12 @@
 
 namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\MainBundleController;
+use Dinnovos\Amazonas\Main\AdminBundleController;
 
-class PagesController extends MainBundleController
+class PagesController extends AdminBundleController
 {
     protected $namespace_model = 'Dinnovos\Amazonas\Models\PageModel';
+    protected $namespace_model_translation = 'Dinnovos\Amazonas\Models\PageTranslationModel';
     protected $namespace_form = 'Dinnovos\Amazonas\Forms\PageForm';
     protected $namespace_bundle = 'Dinnovos\Amazonas';
     protected $controller = 'Admin/Pages';
