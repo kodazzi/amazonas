@@ -31,16 +31,23 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Agregar una imagen</h3>
+                        <h3 class="box-title">Agregar una imagen - <a href="{{ build_url(default_route, {'controller':'Admin/Carousels','action':'list'}) }}" class="btn btn-primary btn-sm">Ver lista</a></h3>
                     </div>
 
                     <script>
                         $(document).ready(function() {
-                            $("#SlideForm_image").upload({
+                            $("#SlideTranslationForm_es_image, #SlideTranslationForm_en_image").upload({
                                 allowedTypes: "jpg,jpeg,png",
-                                returnOnlyText:false,
-                                idTarget: "SlideForm_image"
+                                returnOnlyText:true
                             });
+
+                            /*
+                            $("#SlideTranslationForm_en_image").upload({
+                                allowedTypes: "jpg,jpeg,png",
+                                returnOnlyText:true,
+                                idTarget: "SlideTranslationForm_en_image"
+                            });
+                            */
                         });
                     </script>
 
@@ -64,12 +71,18 @@
         {% for slide in slides %}
         <div class="row">
             <div class="col-lg-12">
+                <h3>Slide {{ slide.sequence }} - <a href="{{ build_url(default_route, {'controller':'Admin/CarouselsSlides','action':'delete', 'param1':carousel.id, 'param2':slide.id}) }}" onclick='return confirm("Desea eliminar el slide?")' class="btn btn-danger btn-sm">Eliminar</a></h3>
+
+                {% for item in slide.Translation %}
                 <div class="thumbnail">
-                    <img src="/upload/{{ slide.image }}" />
+                    <h4>Banner {{ item.language|raw }}</h4>
+                    <img src="/upload/{{ item.image }}" />
                     <div class="caption">
-                        <a href="{{ build_url(default_route, {'controller':'Admin/CarouselsSlides','action':'delete', 'param1':carousel.id, 'param2':slide.id}) }}" onclick='return confirm("Desea eliminar el slide?")' class="btn btn-danger btn-sm">Eliminar</a>
+                        <h4>Banner {{ item.title|raw }}</h4>
+                        <p>{{ item.description|raw }}</p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
         {% endfor %}

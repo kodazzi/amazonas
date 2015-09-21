@@ -65,6 +65,7 @@ class SessionController extends BundleController
     private function validateUser($username, $password)
     {
         $password = $this->getSession()->encript($password);
+
         $Model = \Service::get('db')->model('Dinnovos\Amazonas\Models\AdminModel');
 
         $where = array(

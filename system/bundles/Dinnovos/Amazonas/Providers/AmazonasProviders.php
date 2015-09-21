@@ -33,6 +33,7 @@ class AmazonasProviders implements ServiceProviderInterface
         Alias::set('Post', 'Dinnovos\Amazonas\Services\PostService');
         Alias::set('Block', 'Dinnovos\Amazonas\Services\BlockService');
         Alias::set('Carousel', 'Dinnovos\Amazonas\Services\CarouselService');
+        Alias::set('Settings', 'Dinnovos\Amazonas\Services\SettingsService');
     }
 
     private function functionsView()

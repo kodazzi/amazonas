@@ -22,12 +22,7 @@ class PagesController extends AdminBundleController
 
         if($this->isPost() && array_key_exists($name_form, $post))
         {
-            $title = (array_key_exists('title', $post[$name_form]) && $post[$name_form]['title'] != '') ? $post[$name_form]['title']:'';
-            $code = (array_key_exists('code', $post[$name_form]) && $post[$name_form]['code'] != '') ? $post[$name_form]['code']:'';
-            $slug = (array_key_exists('slug', $post[$name_form]) && $post[$name_form]['slug'] != '') ? $post[$name_form]['slug']:'';
-
-            $post[$name_form]['code'] = ($code) ? $this->slug($code) : $this->slug($title);
-            $post[$name_form]['slug'] = ($slug) ? $this->slug($slug) : $this->slug($title);
+            $post[$name_form]['label'] = (array_key_exists('label', $post[$name_form]) && $post[$name_form]['label'] != '') ? $this->slug($post[$name_form]['label']):'';
 
             $Form->bind($post);
 

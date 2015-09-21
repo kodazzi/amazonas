@@ -2,35 +2,23 @@ CategoryPost:
   options:
     table: categories_posts
     timestampable: true
+    translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
     label 				: {type: string, length: 255, notnull: false}
-
-CategoryPostTranslation:
-  options:
-    table: categories_posts_translation
-    timestampable: true
-    sluggable: [title]
-  fields:
-    id					: {type: primary, strategy: identity}
-    title				: {type: title, length: 255, notnull: true}
-    category:
-      type: foreign
-      model: CategoryPost
-      join: { name: "row_parent_id", foreignField: "id" }
-      relation: "many-to-one"
-    language:
-      type: foreign
-      model: Language
-      join: { name: "language_id", foreignField: "id" }
-      relation: "many-to-one"
+    title				: {type: title, length: 255, notnull: true, translation: true}
 
 Post:
   options:
     table: posts
     timestampable: true
+    sluggable: title
+    translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: true, translation: true}
+    content 		    : {type: editor, translation: true}
+    meta_description 	: {type: note, length: 200, notnull: false, translation: true}
     status				: {type: options, values: {0: 'Desactivo', 1: 'Activo', 2: 'Borrador'}, default: 2}
     category:
       type: foreign
@@ -39,24 +27,3 @@ Post:
       relation: "many-to-one"
       notnull: false
     sequence 		    : {type: integer, length: 6, notnull: false}
-
-PostTranslation:
-  options:
-    table: posts_translation
-    timestampable: true
-    sluggable: [title]
-  fields:
-    id					: {type: primary, strategy: identity}
-    title				: {type: string, length: 255, notnull: true}
-    content 		    : {type: editor}
-    meta_description 	: {type: note, length: 200, notnull: false}
-    post:
-      type: foreign
-      model: Post
-      join: { name: "row_parent_id", foreignField: "id" }
-      relation: "many-to-one"
-    language:
-      type: foreign
-      model: Language
-      join: { name: "language_id", foreignField: "id" }
-      relation: "many-to-one"

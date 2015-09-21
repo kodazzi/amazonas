@@ -15,6 +15,7 @@ class AdminBundleController extends Controller
     protected $action = '';
     protected $view = '';
     protected $title = '';
+    protected $fields = 'a.*, b.title';
     protected $breadcrumb = 'Aqu&iacute;';
     protected $default_route = '@default-admin';
 
@@ -29,6 +30,7 @@ class AdminBundleController extends Controller
             'level_breadcrumb'  => $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')),
             'view_title'        => $this->title,
             'view_controller'   => $this->controller,
+            'user_id'           => $UserCard->getAttribute('id'),
             'username'          => $UserCard->getAttribute('username'),
             'first_name'        => $UserCard->getAttribute('first_name'),
             'last_name'         => $UserCard->getAttribute('last_name'),
@@ -41,9 +43,7 @@ class AdminBundleController extends Controller
     {
         if($this->namespace_model_translation)
         {
-            $items = $this->getDB()->model($this->namespace_model)
-                                    ->join($this->namespace_model_translation, 'b')
-                                    ->fetchAll();
+            $items = $this->getDB()->model($this->namespace_model)->getTranslation('es')->fetchAll(array(), $this->fields);
         }
         else
         {
@@ -58,6 +58,11 @@ class AdminBundleController extends Controller
     public function newAction()
     {
         $Form = $this->getForm($this->namespace_form);
+
+        if($this->namespace_model_translation)
+        {
+            $Form->mergeTranslation();
+        }
 
         $result = $this->saveForm($Form);
 
@@ -74,9 +79,23 @@ class AdminBundleController extends Controller
     public function editAction()
     {
         $id = $this->getParameters('param1');
-        $Item = \Service::get('db')->model($this->namespace_model)->fetch(array('id'=>$id));
+
+        if($this->namespace_model_translation)
+        {
+            $Item = $this->getDB()->model($this->namespace_model)->fetchWithTranslation(null, array('a.id' => $id));
+        }
+        else
+        {
+            $Item = $this->getDB()->model($this->namespace_model)->fetch(array('a.id' => $id));
+        }
 
         $Form = $this->getForm($this->namespace_form, $Item);
+
+        if($this->namespace_model_translation)
+        {
+            $Form->mergeTranslation();
+        }
+
         $result = $this->saveForm($Form, $Item);
 
         if ( ($result instanceof RedirectResponse) )
@@ -96,6 +115,11 @@ class AdminBundleController extends Controller
 
         if($Item)
         {
+            if($this->namespace_model_translation)
+            {
+                \Service::get('db')->model($this->namespace_model_translation)->delete(array('translatable_id'=>$id));
+            }
+
             \Service::get('db')->model($this->namespace_model)->delete(array('id'=>$id));
 
             return $this->redirectResponse( $this->buildUrl($this->default_route, array('bundle'=>'pages', 'controller'=> $this->controller, 'action'=>'list')) );
@@ -125,18 +149,5 @@ class AdminBundleController extends Controller
         $View->set(array(
             'form' =>$Form
         ));
-    }
-
-    protected function fetchAllTranslation($namespace, $lang = null, $where = array())
-    {
-        echo "<pre>";
-        var_dump($namespace);
-        echo "</pre>";
-        exit;
-    }
-
-    protected function fetchTranslation($namespace, $lang = null, $where = array())
-    {
-
     }
 }

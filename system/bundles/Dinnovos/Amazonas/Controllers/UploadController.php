@@ -2,16 +2,18 @@
 
 namespace Dinnovos\Amazonas\Controllers;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Kodazzi\Controller;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 
-class UploadController extends BundleController
+class UploadController extends Controller
 {
     protected $max_size_images = 2048;
     protected $min_width_images = 600;
     protected $min_height_images = 350;
+    protected $allowed_types = '/(\.jpg|\.jpeg|\.png)$/';
+    protected $path = '/upload/';
 
     public function preAction() { }
 
@@ -19,15 +21,21 @@ class UploadController extends BundleController
     {
         $post = $this->getPOST();
         $files = array();
+        $path = trim($this->path, '/').'/';
+
+        if(!is_dir(YS_PUBLIC.$path))
+        {
+            return $this->jsonResponse(array('status'=>'failed','msg'=>'Disculpe el directorio no fue encontrado.'));
+        }
 
         $finder = new Finder();
-        $finder->files()->name('*.jpg')->in(YS_PUBLIC.YS_UPLOAD);
+        $finder->files()->name($this->allowed_types)->in(YS_PUBLIC.$path);
 
         // Une todos los esquemas en un solo array
         foreach( $finder as $file )
         {
             // Concatena el esquema de cada archivo conseguido
-            $files[] = '/'.YS_UPLOAD.$file->getRelativePathname();
+            $files[] = '/'.$path.$file->getRelativePathname();
         }
 
         return $this->jsonResponse(array('status'=>'ok','files'=>$files));
@@ -37,6 +45,13 @@ class UploadController extends BundleController
     {
         $allow_extension = array('jpg', 'jpeg', 'png');
         $max_size = $this->max_size_images;
+
+        $path = trim($this->path, '/').'/';
+
+        if(!is_dir(YS_PUBLIC.$path))
+        {
+            return $this->jsonResponse(array('status'=>'failed','msg'=>'Disculpe el directorio no fue encontrado.'));
+        }
 
         $files = $this->getRequest()->files->all();
 
@@ -62,12 +77,12 @@ class UploadController extends BundleController
             $newName = preg_replace('/[^\.a-zA-Z0-9]+/', '-', strtolower($originalName));
             $prefix = '';
 
-            // Crea el path temporal para subir la imagen
-            $this->mkdir(YS_PUBLIC.YS_UPLOAD);
+            // Crea el path para subir la imagen
+            $this->mkdir(YS_PUBLIC.$path);
             $finish = false;
             $i = 1;
 
-            while(is_file(YS_PUBLIC.YS_UPLOAD.$prefix.$newName))
+            while(is_file(YS_PUBLIC.$path.$prefix.$newName))
             {
                 // Si en 20 intentos aun existe una imagen con el mismo nombre se concatena el datetime actual
                 if($i == 21)
@@ -83,11 +98,11 @@ class UploadController extends BundleController
 
             $newName = $prefix.$newName;
 
-            $target = $UploadedFile->move(YS_PUBLIC.YS_UPLOAD, $newName );
+            $target = $UploadedFile->move(YS_PUBLIC.$path, $newName );
 
             if($target)
             {
-                return $this->jsonResponse(array('status' => 'ok', 'path_http' => '/'.YS_UPLOAD.$newName, ));
+                return $this->jsonResponse(array('status' => 'ok', 'path_http' => '/'.$path.$newName, ));
             }
         }
 

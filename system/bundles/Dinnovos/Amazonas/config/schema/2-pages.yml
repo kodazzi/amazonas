@@ -2,7 +2,7 @@ CategoryPage:
   options:
     table: categories_pages
     timestampable: true
-    sluggable: [title]
+    sluggable: title
     translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
@@ -13,8 +13,13 @@ Page:
   options:
     table: pages
     timestampable: true
+    sluggable: title
+    translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: true, translation: true}
+    content 		    : {type: editor, translation: true}
+    meta_description 	: {type: note, length: 200, notnull: false, translation: true}
     status				: {type: options, values: {0: 'Desactivo', 1: 'Activo', 2: 'Borrador'}, default: 2}
     category:
       type: foreign
@@ -30,24 +35,3 @@ Page:
       join: { name: "parent_id", foreignField : "id" }
       relation: "many-to-one-self-referencing"
       notnull: false
-
-PageTranslation:
-  options:
-    table: pages_translation
-    timestampable: true
-    sluggable: [title]
-  fields:
-    id					: {type: primary, strategy: identity}
-    title				: {type: string, length: 255, notnull: true}
-    content 		    : {type: editor}
-    meta_description 	: {type: note, length: 200, notnull: false}
-    page:
-      type: foreign
-      model: Page
-      join: { name: "row_parent_id", foreignField: "id" }
-      relation: "many-to-one"
-    language:
-      type: foreign
-      model: Language
-      join: { name: "language_id", foreignField: "id" }
-      relation: "many-to-one"

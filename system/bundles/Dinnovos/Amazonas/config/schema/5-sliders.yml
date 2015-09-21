@@ -2,60 +2,26 @@ Carousel:
   options:
     table: carousels
     timestampable: true
+    translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
+    title				: {type: string, length: 255, notnull: true, translation: true}
     status				: {type: options, values: {0: 'Desactivo', 1: 'Activo'}, default: 0}
     label 				: {type: string, length: 255}
-
-CarouselTranslation:
-  options:
-    table: carousels_translation
-    timestampable: true
-    sluggable: [title]
-  fields:
-    id					: {type: primary, strategy: identity}
-    title				: {type: string, length: 255, notnull: true}
-    carousel:
-      type: foreign
-      model: Carousel
-      join: { name: "row_parent_id", foreignField: "id" }
-      relation: "many-to-one"
-    language:
-      type: foreign
-      model: Language
-      join: { name: "language_id", foreignField: "id" }
-      relation: "many-to-one"
 
 Slide:
   options:
     table: slides
     timestampable: true
+    translatable: Language
   fields:
     id					: {type: primary, strategy: identity}
-    image    		    : {type: string, length: 255,  notnull: false}
+    title				: {type: string, length: 255, notnull: true, translation: true}
+    description    		: {type: note, length: 200, notnull: false, translation: true}
+    image    		    : {type: string, length: 255,  notnull: false, translation: true}
     carousel:
       type: foreign
       model: Carousel
       join: { name: "carousel_id", foreignField: "id" }
       relation: "many-to-one"
     sequence 		    : {type: integer, length: 6, notnull: false}
-
-SlideTranslation:
-  options:
-    table: slides_translation
-    timestampable: true
-    sluggable: [title]
-  fields:
-    id					: {type: primary, strategy: identity}
-    title				: {type: string, length: 255, notnull: true}
-    description    		: {type: note, length: 200, notnull: false}
-    slide:
-      type: foreign
-      model: Slide
-      join: { name: "row_parent_id", foreignField: "id" }
-      relation: "many-to-one"
-    language:
-      type: foreign
-      model: Language
-      join: { name: "language_id", foreignField: "id" }
-      relation: "many-to-one"

@@ -2,11 +2,12 @@
 
 namespace Dinnovos\Amazonas\Controllers\Admin;
 
-use Dinnovos\Amazonas\Main\MainBundleController;
+use Dinnovos\Amazonas\Main\AdminBundleController;
 
-class PostsController extends MainBundleController
+class PostsController extends AdminBundleController
 {
     protected $namespace_model = 'Dinnovos\Amazonas\Models\PostModel';
+    protected $namespace_model_translation = 'Dinnovos\Amazonas\Models\PostTranslationModel';
     protected $namespace_form = 'Dinnovos\Amazonas\Forms\PostForm';
     protected $namespace_bundle = 'Dinnovos\Amazonas';
     protected $controller = 'Admin/Posts';
@@ -21,12 +22,7 @@ class PostsController extends MainBundleController
 
         if($this->isPost() && array_key_exists($name_form, $post))
         {
-            $title = (array_key_exists('title', $post[$name_form]) && $post[$name_form]['title'] != '') ? $post[$name_form]['title']:'';
-            $code = (array_key_exists('code', $post[$name_form]) && $post[$name_form]['code'] != '') ? $post[$name_form]['code']:'';
-            $slug = (array_key_exists('slug', $post[$name_form]) && $post[$name_form]['slug'] != '') ? $post[$name_form]['slug']:'';
-
-            $post[$name_form]['code'] = ($code) ? $this->slug($code) : $this->slug($title);
-            $post[$name_form]['slug'] = ($slug) ? $this->slug($slug) : $this->slug($title);
+            $post[$name_form]['label'] = (array_key_exists('label', $post[$name_form]) && $post[$name_form]['label'] != '') ? $this->slug($post[$name_form]['label']):'';
 
             $Form->bind($post);
 

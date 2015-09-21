@@ -46,6 +46,29 @@ $routes->add(
     new Route('/panel/dashboard', array('controller' => 'Dinnovos\Amazonas:Admin/Dashboard:index'))
 );
 
+/******************************************* Upload ************************************************/
+
+$routes->add(
+    'upload-files',
+    new Route('/upload/files', array('controller' => 'Dinnovos\Amazonas:Upload:upload'))
+);
+
+$routes->add(
+    'upload-display-files',
+    new Route('/upload/display-files', array('controller' => 'Dinnovos\Amazonas:Upload:display'))
+);
+
+$routes->add(
+    'upload-rename-file',
+    new Route('/upload/rename-file', array('controller' => 'Dinnovos\Amazonas:Upload:rename'))
+);
+
+$routes->add(
+    'upload-delete-file',
+    new Route('/upload/delete-file', array('controller' => 'Dinnovos\Amazonas:Upload:delete'))
+);
+
+
 $routes->add(
     '@default-admin',
     new Route(

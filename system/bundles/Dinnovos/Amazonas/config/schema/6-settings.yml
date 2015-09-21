@@ -1,10 +1,11 @@
-Configuration:
+Setting:
   options:
-    table: configurations
+    table: settings
     timestampable: true
   fields:
     id					: {type: primary, strategy: identity}
     title   			: {type: string, length: 255}
     content				: {type: string, length: 255}
     label	    	    : {type: string, length: 255}
-    help				: {type: string, length: 255, notnull: true}
+    help				: {type: string, length: 255, notnull: false}
+    type				: {type: options, values: {'string': 'Cadena', 'integer': 'Valor Entero', 'boolean': 'Verdadero o Falso'}, default: 'string'}

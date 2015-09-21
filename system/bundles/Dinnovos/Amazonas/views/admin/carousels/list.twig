@@ -41,9 +41,9 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>T&iacute;tulo</th>
-                                <th>Estatus</th>
-                                <th>Opciones</th>
+                                <th>Carrusel</th>
+                                <th width="10%" class="text-center">Estatus</th>
+                                <th width="15%" class="text-center">Opciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,11 +51,11 @@
                             {% for item in items %}
                                 <tr class="odd gradeX">
                                     <td width="10%">{{ item.id }}</td>
-                                    <td>{{ item.title|raw }}</td>
+                                    <td>{{ item.label }}</td>
                                     <td>{{ item.status }}</td>
                                     <td width="11%" class="text-center">
                                         <a href="{{ build_url(default_route, {'controller':view_controller,'action':'edit','param1':item.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="{{ build_url(default_route, {'controller':view_controller,'action':'delete','param1':item.id}) }}"><i class="fa fa-remove text-danger"></i></a>
+                                        <a href="{{ build_url(default_route, {'controller':view_controller,'action':'delete','param1':item.id}) }}" onclick="return confirm('Desea eliminar el registro?')"><i class="fa fa-remove text-danger"></i></a>
                                         <a href="{{ build_url(default_route, {'controller':'Admin/CarouselsSlides','action':'add','param1':item.id}) }}"><i class="fa fa-picture-o"></i></a>
                                     </td>
                                 </tr>

@@ -323,11 +323,22 @@ class InstallController extends BundleController
 
     private function insertNewData($config)
     {
-        $this->getDB()->model('Dinnovos\Amazonas\Models\ConfigurationModel')->insert(array(
-            'title'     => 'Proyecto',
-            'tag'       => 'DS-NAME-PROYECT',
+        $this->getDB()->model('Dinnovos\Amazonas\Models\SettingModel')->insert(array(
+            'title'     => 'Nombre del Proyecto',
+            'label'     => 'DS-NAME-PROYECT',
             'content'   => $config['project'],
-            'help'      => 'Nombre del proyecto',
+            'help'      => '',
+            'type'      => 'string',
+            'created'   => $this->getTimestamp(),
+            'updated'   => $this->getTimestamp(),
+        ));
+
+        $this->getDB()->model('Dinnovos\Amazonas\Models\SettingModel')->insert(array(
+            'title'     => 'Correo para notificaciones',
+            'label'     => 'DS-EMAIL',
+            'content'   => $config['email'],
+            'help'      => '',
+            'type'      => 'string',
             'created'   => $this->getTimestamp(),
             'updated'   => $this->getTimestamp(),
         ));
@@ -344,23 +355,10 @@ class InstallController extends BundleController
             'updated'       => $this->getTimestamp(),
         ));
 
-        $this->getDB()->model('Dinnovos\Amazonas\Models\CategoryPagesModel')->insert(array(
-            'title'    => 'Primera Categor&iacute;a',
-            'mark'     => 'FIRST-CATEGORY',
-            'slug'     => 'primera-categoria',
-            'created'  => $this->getTimestamp(),
-            'updated'  => $this->getTimestamp(),
-        ));
-
-        $this->getDB()->model('Dinnovos\Amazonas\Models\PageModel')->insert(array(
-            'title'    => 'P&aacute;gina de prueba',
-            'content'  => 'Cotenido de prueba',
-            'status'   => '1',
-            'sequence' => '1',
-            'mark'     => 'pagina-prueba',
-            'slug'     => 'pagina-de-prueba',
-            'created'  => $this->getTimestamp(),
-            'updated'  => $this->getTimestamp(),
+        $this->getDB()->model('Dinnovos\Amazonas\Models\LanguageModel')->insert(array(
+            'name'          => 'Espa&ntilde;ol',
+            'code'          => 'es',
+            'by_default'    => '1',
         ));
     }
 }
