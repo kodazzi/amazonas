@@ -2,9 +2,9 @@
 
 namespace Dinnovos\Amazonas\Controllers;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Dinnovos\Amazonas\Main\WebBundleController;
 
-class HomeController extends BundleController
+class HomeController extends WebBundleController
 {
     public function indexAction()
     {

@@ -324,23 +324,29 @@ class InstallController extends BundleController
     private function insertNewData($config)
     {
         $this->getDB()->model('Dinnovos\Amazonas\Models\SettingModel')->insert(array(
-            'title'     => 'Nombre del Proyecto',
-            'label'     => 'DS-NAME-PROYECT',
-            'content'   => $config['project'],
-            'help'      => '',
-            'type'      => 'string',
-            'created'   => $this->getTimestamp(),
-            'updated'   => $this->getTimestamp(),
+            'title'         => 'Nombre del Proyecto',
+            'label'         => 'DS-NAME-PROYECT',
+            'content'       => $config['project'],
+            'help'          => '',
+            'type'          => 'string',
+            'allow_show'    => '1',
+            'allow_edit'    => '1',
+            'allow_delete'  => '0',
+            'created'       => $this->getTimestamp(),
+            'updated'       => $this->getTimestamp(),
         ));
 
         $this->getDB()->model('Dinnovos\Amazonas\Models\SettingModel')->insert(array(
-            'title'     => 'Correo para notificaciones',
-            'label'     => 'DS-EMAIL',
-            'content'   => $config['email'],
-            'help'      => '',
-            'type'      => 'string',
-            'created'   => $this->getTimestamp(),
-            'updated'   => $this->getTimestamp(),
+            'title'         => 'Correo para notificaciones',
+            'label'         => 'DS-EMAIL',
+            'content'       => $config['email'],
+            'help'          => '',
+            'type'          => 'string',
+            'allow_show'    => '1',
+            'allow_edit'    => '1',
+            'allow_delete'  => '0',
+            'created'       => $this->getTimestamp(),
+            'updated'       => $this->getTimestamp(),
         ));
 
         $this->getDB()->model('Dinnovos\Amazonas\Models\AdminModel')->insert(array(

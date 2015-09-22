@@ -42,24 +42,31 @@
                             <tr>
                                 <th width="5%">ID</th>
                                 <th>T&iacute;tulo</th>
-                                <th width="15%">Etiqueta</th>
+                                <th width="25%">Etiqueta</th>
                                 <th>Valor</th>
-                                <th width="15%" class="text-center">Opciones</th>
+                                <th width="10%" class="text-center">Opciones</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             {% for item in items %}
+                                {% if item.allow_show == 1 %}
                                 <tr class="odd gradeX">
-                                    <td width="10%">{{ item.id }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>{{ item.title|raw }}</td>
                                     <td>[{{ item.label }}]</td>
                                     <td>{{ item.content|raw }}</td>
-                                    <td width="11%" class="text-center">
-                                        <a href="{{ build_url(default_route, {'controller':view_controller,'action':'edit','param1':item.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="{{ build_url(default_route, {'controller':view_controller,'action':'delete','param1':item.id}) }}" onclick="return confirm('Desea eliminar el registro?')"><i class="fa fa-remove text-danger"></i></a>
+                                    <td class="text-center">
+                                        {% if item.allow_edit == 1 %}
+                                            <a href="{{ build_url(default_route, {'controller':view_controller,'action':'edit','param1':item.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                        {% endif %}
+
+                                        {% if item.allow_delete == 1 %}
+                                            <a href="{{ build_url(default_route, {'controller':view_controller,'action':'delete','param1':item.id}) }}" onclick="return confirm('Desea eliminar el registro?')"><i class="fa fa-remove text-danger"></i></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
+                                {% endif %}
                             {% else %}
                                 <tr class="odd gradeX">
                                     <td colspan="5">No se encontraron registros</td>

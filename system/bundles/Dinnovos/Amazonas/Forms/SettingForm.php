@@ -21,6 +21,6 @@ Class SettingForm extends Base\SettingFormBase
 {
 	protected function change()
 	{
-
+        $this->getWidget('content')->setPattern('(.)*');
 	}
 }

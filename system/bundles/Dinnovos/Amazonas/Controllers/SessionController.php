@@ -2,9 +2,9 @@
 
 namespace Dinnovos\Amazonas\Controllers;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Dinnovos\Amazonas\Main\WebBundleController;
 
-class SessionController extends BundleController
+class SessionController extends WebBundleController
 {
     public function loginAction()
     {

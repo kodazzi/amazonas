@@ -28,5 +28,8 @@ Class SettingFormBase extends \Kodazzi\Form\FormBuilder
 		$this->setWidget('label', new \Kodazzi\Form\Fields\String());
 		$this->setWidget('help', new \Kodazzi\Form\Fields\String())->setRequired(false);
 		$this->setWidget('type', new \Kodazzi\Form\Fields\Options())->setOptions(array('string'=>'Cadena', 'integer'=>'Valor Entero', 'boolean'=>'Verdadero o Falso'))->setDefault('string');
+		$this->setWidget('allow_show', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'No', '1'=>'SI'))->setDefault('1');
+		$this->setWidget('allow_edit', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'No', '1'=>'SI'))->setDefault('1');
+		$this->setWidget('allow_delete', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'No', '1'=>'SI'))->setDefault('1');
 	}
 }

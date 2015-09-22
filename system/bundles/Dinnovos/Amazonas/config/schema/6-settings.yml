@@ -9,3 +9,6 @@ Setting:
     label	    	    : {type: string, length: 255}
     help				: {type: string, length: 255, notnull: false}
     type				: {type: options, values: {'string': 'Cadena', 'integer': 'Valor Entero', 'boolean': 'Verdadero o Falso'}, default: 'string'}
+    allow_show		    : {type: options, values: {'0': 'No', '1': 'SI'}, default: '1'}
+    allow_edit	    	: {type: options, values: {'0': 'No', '1': 'SI'}, default: '1'}
+    allow_delete		: {type: options, values: {'0': 'No', '1': 'SI'}, default: '1'}
