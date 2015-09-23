@@ -2,13 +2,12 @@
 
 namespace Dinnovos\Amazonas\Controllers;
 
-use Dinnovos\Amazonas\Main\BundleController;
+use Kodazzi\Controller;
 use Doctrine\DBAL\Configuration;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Application;
-use Symfony\Component\HttpFoundation\Request;
 
-class InstallController extends BundleController
+class InstallController extends Controller
 {
     public function step1Action()
     {
