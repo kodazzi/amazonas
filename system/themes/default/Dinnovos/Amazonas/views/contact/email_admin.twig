@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title> {{ subject }} </title>
+
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <table border="0" bgcolor="#F8F8F8" width="95%" cellpadding="10" style="font-family: Arial;">
+            <tr>
+                <td width="20%" align="left">
+                    <a href="{{ base_url }}"><img src="{{ base_url }}/src/default/logo-email.png" /></a>
+                </td>
+                <td align="center">
+                    <span style="">Mensaje de Contacto {{ data.fullname }}</span>
+                </td>
+                <td width="20%" align="left">
+                </td>
+            </tr>
+        </table>
+
+        <table border="0" bgcolor="#F8F8F8" width="95%" cellpadding="10" style="margin: 5px 0;font-family: Arial;font-size: 14px;color:#000000;">
+            <tr>
+                <td align="left">
+                    <h1>{{ data.fullname }} se ha puesto en contacto</h1>
+
+                    <div>
+                        <ul>
+                            <li><b>Nombre Completo: </b>{{ data.fullname|raw }}</li>
+                            <li><b>Correo Electr&oacute;nico: </b>{{ data.email|raw }}</li>
+                            <li><b>Asunto: </b>{{ data.subject|raw }}</li>
+                            <li><b>Mensaje: </b>{{ data.message|raw }}</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="0" bgcolor="#F8F8F8" width="95%" cellpadding="10" style="font-family: Arial;font-size: 14px;color:#000000;">
+            <tr>
+
+                <td align="center">
+                    <a href="http://facebook.com" target="_blank" class="icon fb"><img src="{{ base_url }}/images/facebook.png" /></a>
+                    <a href="https://twitter.com" target="_blank" class="icon tw"><img src="{{ base_url }}/images/twitter.png" /></a>
+                    <a href="https://plus.google.com" target="_blank" class="icon go"><img src="{{ base_url }}/images/google+.png" /></a>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    &copy; Copyright 2014 by <a href="{{ base_url }}">{{ project }}</a>.
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

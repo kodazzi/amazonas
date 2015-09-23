@@ -33,16 +33,18 @@ class CarouselsSlidesController extends AdminBundleController
             return $result;
         }
 
-        if($Carousel)
+        if(!$Carousel)
         {
-            $slides = $this->getDB()->model($this->namespace_model, 'a')->fetchAll(array('a.carousel_id'=>$Carousel->id), 'a.*', \PDO::FETCH_CLASS, array('a.sequence'=>'ASC'));
+            return $this->responseError404();
+        }
 
-            foreach($slides as $key => $slide)
-            {
-                $translations = $this->getDB()->model($this->namespace_model_translation, 'a')->join('Dinnovos\Amazonas\Models\LanguageModel', 'l')->fetchAll(array('a.translatable_id'=>$slide->id), 'a.*, l.code, l.name as language');
+        $slides = $this->getDB()->model($this->namespace_model, 'a')->fetchAll(array('a.carousel_id'=>$Carousel->id), 'a.*', \PDO::FETCH_CLASS, array('a.sequence'=>'ASC'));
 
-                $slide->Translation = $translations;
-            }
+        foreach($slides as $key => $slide)
+        {
+            $translations = $this->getDB()->model($this->namespace_model_translation, 'a')->join('Dinnovos\Amazonas\Models\LanguageModel', 'l')->fetchAll(array('a.translatable_id'=>$slide->id), 'a.*, l.code, l.name as language');
+
+            $slide->Translation = $translations;
         }
 
         return $this->render("{$this->namespace_bundle}:{$this->view}:slides", array(
@@ -67,6 +69,8 @@ class CarouselsSlidesController extends AdminBundleController
 
             return $this->redirectResponse( $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'add', 'param1'=>$id_carousel)) );
         }
+
+        return $this->responseError404();
     }
 
     protected function saveFormSlide(\Kodazzi\Form\FormBuilder $Form, $id_carousel)

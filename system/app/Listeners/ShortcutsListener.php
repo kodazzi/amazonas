@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class SettingsListener implements EventSubscriberInterface
+class ShortcutsListener implements EventSubscriberInterface
 {
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -35,9 +35,23 @@ class SettingsListener implements EventSubscriberInterface
                 return ($default == -1) ? null : $default;
 
             }, "getSetting");
-
-
         }
+
+        $instance->addMethod(function () use ($instance){
+            return $instance->forward('Dinnovos\Amazonas:Errors:error402');
+        }, "responseError402");
+
+        $instance->addMethod(function () use ($instance){
+            return $instance->forward('Dinnovos\Amazonas:Errors:error404');
+        }, "responseError404");
+
+        $instance->addMethod(function () use ($instance){
+            return $instance->forward('Dinnovos\Amazonas:Errors:error405');
+        }, "responseError402");
+
+        $instance->addMethod(function () use ($instance){
+            return $instance->forward('Dinnovos\Amazonas:Errors:error423');
+        }, "responseError423");
     }
 
     public static function getSubscribedEvents()

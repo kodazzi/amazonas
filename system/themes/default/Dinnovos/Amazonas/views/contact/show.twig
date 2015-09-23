@@ -1,0 +1,136 @@
+{% extends "layout.web.twig" %}
+
+{% block carousel %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-9 content-page">
+            <h3>Cont&aacute;ctenos</h3>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <form method="post" class="" action="">
+
+                <fieldset>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group{{ (form.getWidget('fullname').isRequired()) ? ' required' : '' }}{{ form.getWidget('fullname').isValid() ? '' : ' error has-error' }}">
+                                {{ form.getWidget('fullname').renderLabel()|raw }}
+
+                                {{ form.getWidget('fullname').renderField()|raw }}
+
+                                {% if form.getWidget('fullname').isValid() == false %}
+                                    <p class="text-danger">{{ form.getWidget('fullname').getError()|raw }}</p>
+                                {% else %}
+                                    {% if form.getWidget('fullname').getHelp() != '' %}
+                                        <p class="text-info">{{ form.getWidget('fullname').getHelp()|raw }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group{{ (form.getWidget('email').isRequired()) ? ' required' : '' }}{{ form.getWidget('email').isValid() ? '' : ' error has-error' }}">
+                                {{ form.getWidget('email').renderLabel()|raw }}
+
+                                {{ form.getWidget('email').renderField()|raw }}
+
+                                {% if form.getWidget('email').isValid() == false %}
+                                    <p class="text-danger">{{ form.getWidget('email').getError()|raw }}</p>
+                                {% else %}
+                                    {% if form.getWidget('email').getHelp() != '' %}
+                                        <p class="text-info">{{ form.getWidget('email').getHelp()|raw }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group{{ (form.getWidget('subject').isRequired()) ? ' required' : '' }}{{ form.getWidget('subject').isValid() ? '' : ' error has-error' }}">
+                                {{ form.getWidget('subject').renderLabel()|raw }}
+
+                                {{ form.getWidget('subject').renderField()|raw }}
+
+                                {% if form.getWidget('subject').isValid() == false %}
+                                    <p class="text-danger">{{ form.getWidget('subject').getError()|raw }}</p>
+                                {% else %}
+                                    {% if form.getWidget('subject').getHelp() != '' %}
+                                        <p class="text-info">{{ form.getWidget('subject').getHelp()|raw }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group{{ (form.getWidget('message').isRequired()) ? ' required' : '' }}{{ form.getWidget('message').isValid() ? '' : ' error has-error' }}">
+                                {{ form.getWidget('message').renderLabel()|raw }}
+
+                                {{ form.getWidget('message').renderField()|raw }}
+
+                                {% if form.getWidget('message').isValid() == false %}
+                                    <p class="text-danger">{{ form.getWidget('message').getError()|raw }}</p>
+                                {% else %}
+                                    {% if form.getWidget('message').getHelp() != '' %}
+                                        <p class="text-info">{{ form.getWidget('message').getHelp()|raw }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="{{ build_url('captcha')|raw }}" width="130" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="{{ ( errors.captcha ) ? 'has-error': '' }} ">
+                                <input type="text" name="code_captcha" class="form-control captcha" placeholder="C&oacute;digo." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            {% if errors.captcha %}
+                                <p class="text-danger text-left">{{ errors.captcha|raw }}</p>
+                            {% else %}
+                                <p class="text-info text-left">Escriba el c&oacute;digo de la imagen en el campo.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-5 col-lg-7">
+                            {{ form.getWidget('csrf_token').renderField()|raw }}
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-lg-3 content-bottom">
+            <div class="categories">
+
+                <h4> Bloque </h4>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

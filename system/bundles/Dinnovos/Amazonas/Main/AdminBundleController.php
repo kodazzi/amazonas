@@ -35,7 +35,8 @@ class AdminBundleController extends Controller
             'first_name'        => $UserCard->getAttribute('first_name'),
             'last_name'         => $UserCard->getAttribute('last_name'),
             'role'              => $UserCard->getRole(),
-            'default_route'     => $this->default_route
+            'default_route'     => $this->default_route,
+            'title'             => $this->getSetting('DS-NAME-PROJECT')
         ));
     }
 
@@ -89,6 +90,11 @@ class AdminBundleController extends Controller
             $Item = $this->getDB()->model($this->namespace_model)->fetch(array('a.id' => $id));
         }
 
+        if(!$Item)
+        {
+            return $this->responseError404();
+        }
+
         $Form = $this->getForm($this->namespace_form, $Item);
 
         if($this->namespace_model_translation)
@@ -124,6 +130,8 @@ class AdminBundleController extends Controller
 
             return $this->redirectResponse( $this->buildUrl($this->default_route, array('bundle'=>'pages', 'controller'=> $this->controller, 'action'=>'list')) );
         }
+
+        return $this->responseError404();
     }
 
     protected  function saveForm(\Kodazzi\Form\FormBuilder $Form)

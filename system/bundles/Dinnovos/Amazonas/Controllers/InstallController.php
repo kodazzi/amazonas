@@ -325,7 +325,7 @@ class InstallController extends BundleController
     {
         $this->getDB()->model('Dinnovos\Amazonas\Models\SettingModel')->insert(array(
             'title'         => 'Nombre del Proyecto',
-            'label'         => 'DS-NAME-PROYECT',
+            'label'         => 'DS-NAME-PROJECT',
             'content'       => $config['project'],
             'help'          => '',
             'type'          => 'string',

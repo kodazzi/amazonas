@@ -3,14 +3,15 @@
 namespace Dinnovos\Amazonas\Main;
 
 use Kodazzi\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class WebBundleController extends Controller
 {
+    protected $lang = 'es';
+
     public function preAction()
     {
         $data = array(
-            'title' => $this->getSetting('DS-NAME-PROYECT')
+            'title' => $this->getSetting('DS-NAME-PROJECT')
         );
 
         $this->getView()->set($data);

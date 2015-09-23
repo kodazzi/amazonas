@@ -31,7 +31,7 @@ name:
 email:
   extend: string
   parameters:
-    unique: {required: true, type-value: 'boolean'}
+    unique: {required: false, type-value: 'boolean'}
 
 # Doctrine: string
 login:

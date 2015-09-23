@@ -1,0 +1,11 @@
+Message:
+  options:
+    table: messages
+    timestampable: true
+  fields:
+    id					: {type: primary, strategy: identity}
+    fullname			: {type: string, length: 255}
+    email 		        : {type: email, length: 100}
+    subject 			: {type: string, length: 255}
+    message				: {type: note, length: 200}
+    status				: {type: options, values: {0: 'Sin Revisar', 1: 'Revisado'}, default: 0}

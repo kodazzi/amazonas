@@ -32,5 +32,7 @@ class SettingsController extends AdminBundleController
 
             return $this->redirectResponse( $this->buildUrl($this->default_route, array('bundle'=>'pages', 'controller'=> $this->controller, 'action'=>'list')) );
         }
+
+        return $this->responseError404();
     }
 }

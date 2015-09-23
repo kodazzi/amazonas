@@ -15,4 +15,4 @@ Event::listener('kernel.request', function ($event){
 */
 
 Event::subscribe(new Listeners\ContactListener());
-Event::subscribe(new Listeners\SettingsListener());
+Event::subscribe(new Listeners\ShortcutsListener());

@@ -10,11 +10,21 @@
 
 use Symfony\Component\Routing\Route;
 
-/***************************************** Installation ******************************************/
+/***************************************** Frontend ******************************************/
 
 $routes->add(
     'page-show',
-    new Route("/pagina/{slug}", array('controller' => 'Dinnovos\Amazonas:Page:show'))
+    new Route("/pagina/{slug}", array('controller' => 'Dinnovos\Amazonas:Pages:show'))
+);
+
+$routes->add(
+    'contact',
+    new Route("/contactenos", array('controller' => 'Dinnovos\Amazonas:Contact:show'))
+);
+
+$routes->add(
+    'captcha',
+    new Route('/code/captcha', array( 'controller' => 'Dinnovos\Amazonas:Captcha:show') )
 );
 
 /****************************************** Install ************************************************/
