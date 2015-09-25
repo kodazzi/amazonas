@@ -17,9 +17,33 @@
                     height: 350,
                     language : 'es'
                 });
+
+                $("#thumbnail-PostForm_image").upload({
+                    allowedTypes: "jpg,jpeg,png",
+                    returnOnlyText: false,
+                    idFieldTarget: "PostForm_image",
+                    idShow: "thumbnail-PostForm_image"
+                });
             });
         </script>
 
         {{ form.render()|raw }}
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="PostForm_image">Imagen Principal</label>
+
+                <div class="thumbnail" id="thumbnail-PostForm_image">
+
+                    {% if item.image %}
+                        <img src="/upload/{{ item.image }}">
+                    {% else %}
+                        <img src="/images/click-here.jpg">
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

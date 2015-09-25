@@ -6,7 +6,7 @@ namespace Dinnovos\Amazonas\Models\Base;
 Class PostModelBase
 {
 	const table = 'as_posts';
-	const title = 'sequence';
+	const title = 'image';
 	const primary = 'id';
 	const hasTimestampable = true;
     const modelLanguage = 'Dinnovos\Amazonas\Models\LanguageModel';

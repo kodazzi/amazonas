@@ -11,7 +11,9 @@
             actionDelete: "/upload/delete-file",
             allowedTypes: "jpg,jpeg,png",
             returnType: "json",
-            idTarget: "",
+            idFieldTarget: "",
+            idShow: "",
+            path:"/upload/",
             autoSubmit: true,
             returnOnlyText: false,
             selectedFile: null,
@@ -308,13 +310,13 @@
 
             settings.selectedFile = {name: name};
 
-            if(settings.idTarget == ''){
+            if(settings.idFieldTarget == ''){
                 var target = settings.element;
             }else{
-                var target = jQuery('#'+settings.idTarget);
+                var target = jQuery('#'+settings.idFieldTarget);
 
                 if(target.length == 0){
-                    alert('El elemento con id '+settings.idTarget+' no fue encontrado.');
+                    alert('El elemento con id '+settings.idFieldTarget+' no fue encontrado.');
                     return false;
                 }
             }
@@ -323,8 +325,17 @@
 
             if(type == 'INPUT' || type == 'TEXTAREA'){
                 target.val(name);
-            }else{
-                target.html('<img src="'+settings.path+name+'" />');
+            }
+
+            if(settings.idShow != ''){
+                var element = jQuery('#'+settings.idShow);
+
+                if(element.length == 0){
+                    alert('El elemento con id '+settings.idShow+' no fue encontrado.');
+                    return false;
+                }
+
+                element.html('<img src="'+settings.path+name+'" />');
             }
 
             return true;

@@ -18,6 +18,7 @@ Post:
     id					: {type: primary, strategy: identity}
     title				: {type: string, length: 255, notnull: true, translation: true}
     content 		    : {type: editor, translation: true}
+    image				: {type: string, length: 255, notnull: false}
     meta_description 	: {type: note, length: 200, notnull: false, translation: true}
     status				: {type: options, values: {0: 'Desactivo', 1: 'Activo', 2: 'Borrador'}, default: 2}
     category:

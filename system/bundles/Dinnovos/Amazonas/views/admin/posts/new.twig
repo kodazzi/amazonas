@@ -1,5 +1,16 @@
 {% extends "amazonas.admin.twig" %}
 
+{% block stylesheet_header %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/src/upload/css/k-upload.css">
+{% endblock %}
+
+{% block javascript_header %}
+    {{ parent() }}
+    <script type="text/javascript" src="/src/upload/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/src/upload/js/k-upload.js"></script>
+{% endblock %}
+
 {% block javascript_footer %}
     {{ parent() }}
     <script type="text/javascript" src="/src/tinymce/tinymce.min.js"></script>

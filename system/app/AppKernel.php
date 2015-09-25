@@ -15,7 +15,6 @@ Class AppKernel extends Kernel
     public function start()
     {
         Service::registerBundles(array(
-                'Dinnovos\Site\\',
                 'Dinnovos\Amazonas\\',
                 ));
     }

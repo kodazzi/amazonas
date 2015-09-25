@@ -23,6 +23,7 @@ Class PostFormBase extends \Kodazzi\Form\FormBuilder
 	{
 		$this->setNameModel('Dinnovos\Amazonas\Models\PostModel');
 
+		$this->setWidget('image', new \Kodazzi\Form\Fields\String())->setRequired(false);
 		$this->setWidget('status', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'Desactivo', '1'=>'Activo', '2'=>'Borrador'))->setDefault('2');
 		$this->setWidget('category_id', new \Kodazzi\Form\Fields\Foreign())->setRequired(false)->setTypeRelation('many-to-one')->definitionRelation('Dinnovos\Amazonas\Models\CategoryPostModel', array('name' => 'category_id', 'foreignField' => 'id') );
 		$this->setWidget('sequence', new \Kodazzi\Form\Fields\Integer())->setRequired(false);
