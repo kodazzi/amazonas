@@ -7,13 +7,26 @@ use Kodazzi\Controller;
 class WebBundleController extends Controller
 {
     protected $lang = 'es';
+    protected $title = null;
+    protected $hasSession = false;
+    protected $User = null;
 
     public function preAction()
     {
-        $data = array(
-            'title' => $this->getSetting('DS-NAME-PROJECT')
-        );
+        $this->title = ($this->title) ? $this->title : $this->getSetting('DS-NAME-PROJECT');
+        $Card = $this->getUserCardManager()->getCard();
 
-        $this->getView()->set($data);
+        // Busca si existe la sesion.
+        if($Card && $Card->getRole() == 'USER')
+        {
+            $this->hasSession = true;
+            $this->User = $Card->getAttributes();
+        }
+
+        $this->getView()->set(array(
+            'title'         => $this->title,
+            'has_session'   => $this->hasSession,
+            'user'          => $this->User
+        ));
     }
 }

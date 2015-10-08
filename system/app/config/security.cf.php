@@ -1,6 +1,6 @@
 <?php
  /**
- * This file is part of the Yulois Framework.
+ * This file is part of the Kodazzi Framework.
  *
  * (c) Jorge Gaitan <info.yulois@gmail.com>
  *
@@ -16,6 +16,12 @@ return array(
             'role'              => 'ADMIN',
             'login_route'       => 'login',
             'forbidden_route'   => 'forbidden'
+        ),
+        array(
+            'pattern'           => '^/usuario',
+            'role'              => 'USER',
+            'login_route'       => 'user-login',
+            'forbidden_route'   => 'user-forbidden'
         )
     )
 );

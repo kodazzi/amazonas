@@ -21,6 +21,6 @@ Class PostForm extends Base\PostFormBase
 {
 	protected function change()
 	{
-
+        $this->getWidget('image')->setHidden(true);
 	}
 }

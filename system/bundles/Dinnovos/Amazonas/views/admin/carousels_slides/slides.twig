@@ -1,4 +1,4 @@
-{% extends "amazonas.admin.twig" %}
+{% extends "layouts/amazonas.admin.twig" %}
 
 {% block stylesheet_header %}
     {{ parent() }}
@@ -36,18 +36,10 @@
 
                     <script>
                         $(document).ready(function() {
-                            $("#SlideTranslationForm_es_image, #SlideTranslationForm_en_image").upload({
+                            $("#SlideTranslationForm_es_image").upload({
                                 allowedTypes: "jpg,jpeg,png",
                                 returnOnlyText:true
                             });
-
-                            /*
-                            $("#SlideTranslationForm_en_image").upload({
-                                allowedTypes: "jpg,jpeg,png",
-                                returnOnlyText:true,
-                                idTarget: "SlideTranslationForm_en_image"
-                            });
-                            */
                         });
                     </script>
 

@@ -1,0 +1,24 @@
+{% extends "layout.web.twig" %}
+
+{% block carousel %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+
+        {% if status == 1 %}
+            <h1>&#161;Nuevo correo de confirmaci&oacute;n enviado!</h1>
+            <p class="alert alert-success">
+                Hemos enviado un nuevo correo a su direcci&oacute;n para que valide su cuenta, por favor siga las instrucciones del mismo.
+            </p>
+        {% elseif status == 2 or status == 0 %}
+            <h1>&#161;Ocurrio un error interno!</h1>
+            <p class="alert alert-danger">
+                Lo sentimos, pero ha ocurrido un error, por favor intente m&aacute;s tarde.
+            </p>
+        {% endif %}
+    </div>
+
+{% endblock %}

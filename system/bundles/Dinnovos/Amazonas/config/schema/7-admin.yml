@@ -9,7 +9,7 @@ Admin:
     email				    : {type: email, length: 100, unique: true}
     username				: {type: login, length: 100, unique: true}
     password			    : {type: password, length: 255}
-    super_admin             : {type: options, values: {0: SI, 1: No}, default: 0}
+    super_admin             : {type: options, values: {0: No, 1: Si}, default: 0}
     token_forgotten			: {type: string, length: 255, notnull: false}
     token_forgotten_created	: {type: datetime, notnull: false}
     last_logging	        : {type: datetime, notnull: false}

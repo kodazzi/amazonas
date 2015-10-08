@@ -32,7 +32,7 @@ class ShortcutsListener implements EventSubscriberInterface
                     return $instance->settings[$label];
                 }
 
-                return ($default == -1) ? null : $default;
+                return ($default === -1) ? null : $default;
 
             }, "getSetting");
         }

@@ -1,0 +1,46 @@
+{% extends "layout.web.twig" %}
+
+{% block carousel %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if status == 1 %}
+
+        <div class="jumbotron">
+            <h1>&#161;Felicitaciones!</h1>
+            <p class="alert alert-success">Su cuenta de correo ha sido confirmada satisfactoriamente.</p>
+
+            <p>  <a href="{{ build_url('user-login') }}" class="btn btn-primary" role="button"> Iniciar Sesi&oacute;n </a> </p>
+        </div>
+
+    {% elseif status == 2 %}
+
+        <div class="jumbotron">
+            <h1>&#161;Enlace inv&aacute;lido!</h1>
+            <p class="alert alert-danger">Ocurrio un problema, el enlace no es v&aacute;lido.</p>
+
+            <p> Por favor verifique el correo que le fue enviado al momento del registro.</p>
+            <p> Si desea recibir nuevamente el e-mail para confirmar su cuenta de correo por favor haga clic en el siguiente bot&oacute;n <a href="{{ build_url('user-login') }}" class="btn btn-primary" role="button"> Inicie Sesi&oacute;n </a> y siga las instrucciones.</p>
+        </div>
+
+    {% elseif status == 3 %}
+
+        <div class="jumbotron">
+            <h1>&#161;Su enlace ha expirado!</h1>
+            <p class="alert alert-danger">Lo sentimos pero este enlace fue creado hace m&aacute;s de ({{ max_days }}) d&iacute;as, por lo tanto ha expirado.</p>
+
+            <p> Si desea recibir nuevamente el e-mail para confirmar su cuenta de correo por favor haga clic en el siguiente bot&oacute;n <a href="{{ build_url('user-login') }}" class="btn btn-primary" role="button"> Inicie Sesi&oacute;n </a> y siga las instrucciones.</p>
+        </div>
+
+    {% elseif status == 4 %}
+
+        <div class="jumbotron">
+            <h1>&#161;Cuenta de correo verificada!</h1>
+            <p class="alert alert-success">Su cuenta de correo ya ha sido verificada en nuestro sistema. </p>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

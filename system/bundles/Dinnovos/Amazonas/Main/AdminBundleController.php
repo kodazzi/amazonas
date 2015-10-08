@@ -17,6 +17,7 @@ class AdminBundleController extends Controller
     protected $title = '';
     protected $fields = 'a.*, b.title';
     protected $breadcrumb = 'Aqu&iacute;';
+    protected $default_route_layout = '@default-admin';
     protected $default_route = '@default-admin';
 
     public function preAction()
@@ -26,17 +27,18 @@ class AdminBundleController extends Controller
         $UserCard = $this->getUserCardManager()->getCard();
 
         $this->getView()->set(array(
-            'here_breadcrumb'   => $this->breadcrumb,
-            'level_breadcrumb'  => $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')),
-            'view_title'        => $this->title,
-            'view_controller'   => $this->controller,
-            'user_id'           => $UserCard->getAttribute('id'),
-            'username'          => $UserCard->getAttribute('username'),
-            'first_name'        => $UserCard->getAttribute('first_name'),
-            'last_name'         => $UserCard->getAttribute('last_name'),
-            'role'              => $UserCard->getRole(),
-            'default_route'     => $this->default_route,
-            'title'             => $this->getSetting('DS-NAME-PROJECT')
+            'here_breadcrumb'       => $this->breadcrumb,
+            'level_breadcrumb'      => $this->buildUrl($this->default_route, array('controller'=> $this->controller, 'action'=>'list')),
+            'view_title'            => $this->title,
+            'view_controller'       => $this->controller,
+            'user_id'               => $UserCard->getAttribute('id'),
+            'username'              => $UserCard->getAttribute('username'),
+            'first_name'            => $UserCard->getAttribute('first_name'),
+            'last_name'             => $UserCard->getAttribute('last_name'),
+            'role'                  => $UserCard->getRole(),
+            'default_route_layout'  => $this->default_route_layout,
+            'default_route'         => $this->default_route,
+            'title'                 => $this->getSetting('DS-NAME-PROJECT')
         ));
     }
 
@@ -155,7 +157,7 @@ class AdminBundleController extends Controller
         }
 
         $View->set(array(
-            'form' =>$Form
+            'form' => $Form
         ));
     }
 }

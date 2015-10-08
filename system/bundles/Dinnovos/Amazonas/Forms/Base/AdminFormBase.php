@@ -28,7 +28,7 @@ Class AdminFormBase extends \Kodazzi\Form\FormBuilder
 		$this->setWidget('email', new \Kodazzi\Form\Fields\Email())->setUnique(true);
 		$this->setWidget('username', new \Kodazzi\Form\Fields\Login())->setUnique(true);
 		$this->setWidget('password', new \Kodazzi\Form\Fields\Password());
-		$this->setWidget('super_admin', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'SI', '1'=>'No'))->setDefault('0');
+		$this->setWidget('super_admin', new \Kodazzi\Form\Fields\Options())->setOptions(array('0'=>'No', '1'=>'Si'))->setDefault('0');
 		$this->setWidget('token_forgotten', new \Kodazzi\Form\Fields\String())->setRequired(false);
 		$this->setWidget('token_forgotten_created', new \Kodazzi\Form\Fields\Datetime())->setRequired(false);
 		$this->setWidget('last_logging', new \Kodazzi\Form\Fields\Datetime())->setRequired(false);

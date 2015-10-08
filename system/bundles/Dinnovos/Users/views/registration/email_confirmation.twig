@@ -1,0 +1,12 @@
+{% extends "layouts/email.users.twig" %}
+
+{% block content %}
+    <h1>Confirmaci&oacute;n de cuenta de correo.</h1>
+
+    <div>
+        <p>Para finalizar el proceso de registro debemos confirmar esta direcci&oacute;n de correo, lo cual es muy facil.</p>
+        <p>Tan solo debe hacer clic en el siguiente bot&oacute;n <a href="{{ base_url }}{{ build_url('user-token-confirmation-email', {'token':token}) }}">Clic Aqu&iacute;</a> &oacute; copie y pegar el siguiente enlace en su navegador:</p>
+
+        <div style="padding: 10px; background-color: #FCF8E3; border: 1px solid #faebcc;">{{ base_url }}{{ build_url('user-token-confirmation-email', {'token':token} ) }}</div>
+    </div>
+{% endblock %}

@@ -16,6 +16,7 @@ Class AppKernel extends Kernel
     {
         Service::registerBundles(array(
                 'Dinnovos\Amazonas\\',
+                'Dinnovos\Users\\',
                 ));
     }
 }

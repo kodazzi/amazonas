@@ -44,6 +44,19 @@
                     <li><a href="/">Inicio</a></li>
                     <li><a href="{{ build_url('page-show', {'slug':'quienes-somos'}) }}">Quienes Somos</a></li>
                     <li><a href="{{ build_url('contact') }}">Cont&aacute;ctenos</a></li>
+                    {% if user %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Usuario <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ build_url('user-dashboard') }}">Panel</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ build_url('user-logout') }}">Salir</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="{{ build_url('user-login') }}"><i class="glyphicon glyphicon-user"></i> Ingresar</a></li>
+                    <li><a href="{{ build_url('user-registration') }}"><i class="glyphicon glyphicon-pencil"></i> Registrarse</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

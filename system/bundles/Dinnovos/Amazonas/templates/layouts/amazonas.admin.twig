@@ -3,11 +3,11 @@
     <head>
         {% block head %}
 
-            <title>{% block title %}Panel | Amazonas{% endblock %} </title>
+            <title>{% block title %} {{ title }} | Panel {% endblock %} </title>
 
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta charset="utf-8">
-            <meta name="description" content="{% block meta_description %} Proyecto con Yulois 1.0 {% endblock %}">
+            <meta name="description" content="{% block meta_description %} Panel Amazonas {% endblock %}">
             <meta name="author" content="Autor">
 
             <!-- Responsive Metatag -->
@@ -38,7 +38,7 @@
 
         <header class="main-header">
 
-            <a href="{{ build_url('panel-dashboard') }}" class="logo"><b>Amazonas</b></a>
+            <a href="{{ build_url('panel-dashboard') }}" class="logo"><b>{{ title }}</b></a>
 
             <nav class="navbar navbar-static-top" role="navigation">
 
@@ -66,7 +66,7 @@
 
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ build_url(default_route, {'controller':'Admin/Admins','action':'edit','param1':user_id}) }}" class="btn btn-default btn-flat">Perfil</a>
+                                        <a href="{{ build_url(default_route_layout, {'controller':'Admin/Admins','action':'edit','param1':user_id}) }}" class="btn btn-default btn-flat">Perfil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ build_url('logout') }}" class="btn btn-default btn-flat">Salir</a>
@@ -98,13 +98,13 @@
                     <li class="treeview">
                         <a href="#"><span>P&aacute;ginas {{ route }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Pages',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Pages',action:'new'}) }}">Nueva</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Pages',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Pages',action:'new'}) }}">Nueva</a></li>
                             <li>
                                 <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ build_url(default_route, {controller:'Admin/PagesCategories',action:'list'}) }}"> Lista</a></li>
-                                    <li><a href="{{ build_url(default_route, {controller:'Admin/PagesCategories',action:'new'}) }}"> Nueva</a></li>
+                                    <li><a href="{{ build_url(default_route_layout, {controller:'Admin/PagesCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url(default_route_layout, {controller:'Admin/PagesCategories',action:'new'}) }}"> Nueva</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -112,13 +112,13 @@
                     <li class="treeview">
                         <a href="#"><span>Noticias</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Posts',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Posts',action:'new'}) }}">Nueva</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Posts',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Posts',action:'new'}) }}">Nueva</a></li>
                             <li>
                                 <a href="#"> Categor&iacute;as <i class="fa fa-angle-left pull-right"></i></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ build_url(default_route, {controller:'Admin/PostsCategories',action:'list'}) }}"> Lista</a></li>
-                                    <li><a href="{{ build_url(default_route, {controller:'Admin/PostsCategories',action:'new'}) }}"> Nueva</a></li>
+                                    <li><a href="{{ build_url(default_route_layout, {controller:'Admin/PostsCategories',action:'list'}) }}"> Lista</a></li>
+                                    <li><a href="{{ build_url(default_route_layout, {controller:'Admin/PostsCategories',action:'new'}) }}"> Nueva</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -126,19 +126,26 @@
                     <li class="treeview">
                         <a href="#"><span>Bloques</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Blocks',action:'list'}) }}">Lista</a></li>
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Blocks',action:'new'}) }}">Nuevo</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Blocks',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Blocks',action:'new'}) }}">Nuevo</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="{{ build_url(default_route, {controller:'Admin/Carousels',action:'list'}) }}"><span>Carrusel</span></a>
+                        <a href="{{ build_url(default_route_layout, {controller:'Admin/Carousels',action:'list'}) }}"><span>Carrusel</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ build_url('@default-admin-user', {controller:'Admin/Users',action:'list'}) }}">Lista</a></li>
+                            <li><a href="{{ build_url('@default-admin-user', {controller:'Admin/Users',action:'new'}) }}">Nuevo</a></li>
+                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#"><span>General</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Languages',action:'list'}) }}">Lenguajes</a></li>
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Admins',action:'list'}) }}">Administradores</a></li>
-                            <li><a href="{{ build_url(default_route, {controller:'Admin/Settings',action:'list'}) }}">Ajustes</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Languages',action:'list'}) }}">Lenguajes</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Admins',action:'list'}) }}">Administradores</a></li>
+                            <li><a href="{{ build_url(default_route_layout, {controller:'Admin/Settings',action:'list'}) }}">Ajustes</a></li>
                         </ul>
                     </li>
                 </ul>

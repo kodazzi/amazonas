@@ -15,7 +15,6 @@
             idShow: "",
             path:"/upload/",
             autoSubmit: true,
-            returnOnlyText: false,
             selectedFile: null,
             element: null,
             onSelect: function(file){}

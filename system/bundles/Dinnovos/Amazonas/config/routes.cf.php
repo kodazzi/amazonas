@@ -56,6 +56,17 @@ $routes->add(
     new Route('/panel/dashboard', array('controller' => 'Dinnovos\Amazonas:Admin/Dashboard:index'))
 );
 
+// Permite acceder al formulario para cambiar la clave.
+$routes->add(
+    'admin-modify-password',
+    new Route('/amazonas/modificar-clave/{token}', array('controller' => 'Dinnovos\Amazonas:Session:modifyPassword'), array('token' => '^[a-zA-Z0-9]+$'))
+);
+
+$routes->add(
+    'admin-forgotten-password',
+    new Route('/amazonas/olvido-clave', array('controller' => 'Dinnovos\Amazonas:Session:forgottenPassword'))
+);
+
 /******************************************* Upload ************************************************/
 
 $routes->add(

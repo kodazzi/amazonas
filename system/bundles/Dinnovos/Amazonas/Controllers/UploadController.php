@@ -12,8 +12,12 @@ class UploadController extends Controller
     protected $max_size_images = 2048;
     protected $min_width_images = 600;
     protected $min_height_images = 350;
-    protected $allowed_types = '/(\.jpg|\.jpeg|\.png)$/';
+    protected $allowed_types_regular_expression = '/(\.jpg|\.jpeg|\.png)$/';
+    protected $allowed_types = array('jpg', 'jpeg', 'png');
     protected $path = '/upload/';
+    protected $path_tmp = '/tmp';
+
+    protected $isSimple = false;
 
     public function preAction() { }
 
@@ -29,7 +33,7 @@ class UploadController extends Controller
         }
 
         $finder = new Finder();
-        $finder->files()->name($this->allowed_types)->in(YS_PUBLIC.$path);
+        $finder->files()->name($this->allowed_types_regular_expression)->in(YS_PUBLIC.$path);
 
         // Une todos los esquemas en un solo array
         foreach( $finder as $file )
@@ -43,14 +47,15 @@ class UploadController extends Controller
 
     public function uploadAction()
     {
-        $allow_extension = array('jpg', 'jpeg', 'png');
+        $allowed_types = $this->allowed_types;
         $max_size = $this->max_size_images;
-
         $path = trim($this->path, '/').'/';
 
-        if(!is_dir(YS_PUBLIC.$path))
+        if($this->isSimple)
         {
-            return $this->jsonResponse(array('status'=>'failed','msg'=>'Disculpe el directorio no fue encontrado.'));
+            $path = trim($this->path_tmp, '/').'/';
+
+            $this->mkdir($path);
         }
 
         $files = $this->getRequest()->files->all();
@@ -63,7 +68,7 @@ class UploadController extends Controller
             $extension = strtolower( $UploadedFile->getClientOriginalExtension() );
             $size = $UploadedFile->getClientSize();
 
-            if( !in_array( $extension, $allow_extension ) )
+            if ( !in_array( $extension, $allowed_types ) )
             {
                 return $this->jsonResponse(array('status' => 'failed', 'msg' => '<p class="text-danger"> El tipo de archivo seleccinado no es v&aacute;lido.</p>'));
             }
@@ -75,33 +80,59 @@ class UploadController extends Controller
 
             // Sustituye todo lo que no se alfanumerico por guion
             $newName = preg_replace('/[^\.a-zA-Z0-9]+/', '-', strtolower($originalName));
-            $prefix = '';
 
-            // Crea el path para subir la imagen
-            $this->mkdir(YS_PUBLIC.$path);
-            $finish = false;
-            $i = 1;
-
-            while(is_file(YS_PUBLIC.$path.$prefix.$newName))
+            // Si es simple le agrega al nombre el timestamp para que sea unico en el directorio temporal
+            if($this->isSimple)
             {
-                // Si en 20 intentos aun existe una imagen con el mismo nombre se concatena el datetime actual
-                if($i == 21)
+                $newName = preg_replace('/[^0-9]+/', '', $this->getTimestamp()).'-'.$newName;
+            }
+            else
+            {
+                $prefix = '';
+
+                // Crea el path para subir la imagen
+                $this->mkdir(YS_PUBLIC.$path);
+
+                $i = 1;
+
+                while(is_file(YS_PUBLIC.$path.$prefix.$newName))
                 {
-                    $prefix = '';
-                    $newName = preg_replace('/[^0-9]+/', '', $this->getTimestamp()).'-'.$newName;
-                    break;
+                    // Si en 20 intentos aun existe una imagen con el mismo nombre se concatena el datetime actual
+                    if($i == 21)
+                    {
+                        $prefix = '';
+                        $newName = preg_replace('/[^0-9]+/', '', $this->getTimestamp()).'-'.$newName;
+                        break;
+                    }
+
+                    $prefix = "$i-";
+                    $i++;
                 }
 
-                $prefix = "$i-";
-                $i++;
+                $newName = $prefix.$newName;
             }
-
-            $newName = $prefix.$newName;
 
             $target = $UploadedFile->move(YS_PUBLIC.$path, $newName );
 
             if($target)
             {
+                // Si el upload es simple se almacena los datos del archivo temporal en la sesion.
+                if($this->isSimple)
+                {
+                    $old_image = $this->getSession()->get('upload');
+
+                    // Si encuentra una imagen vieja en la sesion la elimina antes de almacenar una nueva.
+                    if(is_array($old_image) && array_key_exists('temporary_path', $old_image) && is_file($old_image['temporary_path']))
+                    {
+                        unlink($old_image['temporary_path']);
+                    }
+
+                    $this->getSession()->set('upload', array(
+                        'temporary_path'    => YS_PUBLIC.$path.$newName,
+                        'name'              => $newName,
+                    ));
+                }
+
                 return $this->jsonResponse(array('status' => 'ok', 'path_http' => '/'.$path.$newName, ));
             }
         }
@@ -154,6 +185,74 @@ class UploadController extends Controller
         }
 
         return $this->jsonResponse(array('status'=>'failed', 'msg'=>'Ocurrio un error, intente nuevamente.'));
+    }
+
+    protected function upload()
+    {
+        $allowed_types = $this->allowed_types;
+        $max_size = $this->max_size_images;
+
+        $path = trim($this->path, '/').'/';
+
+        if(!is_dir(YS_PUBLIC.$path))
+        {
+            return $this->jsonResponse(array('status'=>'failed','msg'=>'Disculpe el directorio no fue encontrado.'));
+        }
+
+        $files = $this->getRequest()->files->all();
+
+        $UploadedFile = ( array_key_exists('file', $files) ) ? $files['file'] : null;
+
+        if( $UploadedFile && $UploadedFile instanceof UploadedFile )
+        {
+            $originalName = $UploadedFile->getClientOriginalName();
+            $extension = strtolower( $UploadedFile->getClientOriginalExtension() );
+            $size = $UploadedFile->getClientSize();
+
+            if( !in_array( $extension, $allowed_types ) )
+            {
+                return $this->jsonResponse(array('status' => 'failed', 'msg' => '<p class="text-danger"> El tipo de archivo seleccinado no es v&aacute;lido.</p>'));
+            }
+
+            if ( $size > (int)$max_size * 1024 )
+            {
+                return $this->jsonResponse(array('status' => 'failed', 'msg' => '<p class="text-danger"> La imagen no puede ser mayor a ('.$max_size.')Kb.</p>'));
+            }
+
+            // Sustituye todo lo que no se alfanumerico por guion
+            $newName = preg_replace('/[^\.a-zA-Z0-9]+/', '-', strtolower($originalName));
+            $prefix = '';
+
+            // Crea el path para subir la imagen
+            $this->mkdir(YS_PUBLIC.$path);
+
+            $i = 1;
+
+            while(is_file(YS_PUBLIC.$path.$prefix.$newName))
+            {
+                // Si en 20 intentos aun existe una imagen con el mismo nombre se concatena el datetime actual
+                if($i == 21)
+                {
+                    $prefix = '';
+                    $newName = preg_replace('/[^0-9]+/', '', $this->getTimestamp()).'-'.$newName;
+                    break;
+                }
+
+                $prefix = "$i-";
+                $i++;
+            }
+
+            $newName = $prefix.$newName;
+
+            $target = $UploadedFile->move(YS_PUBLIC.$path, $newName );
+
+            if($target)
+            {
+                return $this->jsonResponse(array('status' => 'ok', 'path_http' => '/'.$path.$newName, ));
+            }
+        }
+
+        return $this->jsonResponse(array('status' => 'failed', 'msg' => 'Ocurrio un error al subir la imagen, por favor intente nuevamente.'));
     }
 
     protected function mkdir( $path, $type_response = 'json' )

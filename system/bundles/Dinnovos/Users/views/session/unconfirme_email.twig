@@ -1,0 +1,20 @@
+{% extends "layout.web.twig" %}
+
+{% block carousel %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>&#161;Correo electr&oacute;nico sin confirmar!</h1>
+        <p class="alert alert-danger">
+            Lo sentimos, pero aun no hemos verificado su cuenta de correo.
+        </p>
+
+        <p>Siga la instrucciones del e-mail enviado al momento del registro, o haga clic el bot&oacute;n que se muestra a continuaci&oacute;n para recibir nuevamente el e-mail con las instrucciones para verificar la validez de su direcci&oacute;n de correo.</p>
+
+        <p><a href="{{ build_url('user-send-confirmation-email') }}" class="btn btn-primary" role="button">Enviar E-mail</a></p>
+    </div>
+
+{% endblock %}

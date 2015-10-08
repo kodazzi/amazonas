@@ -1,0 +1,10 @@
+{% extends "layouts/email.users.twig" %}
+
+{% block content %}
+    <h1>Se ha registrado un nuevo usuario.</h1>
+
+    <div>
+        <p>{{ dump(user)|raw }}</p>
+        <p>{{ dump(server)|raw }}</p>
+    </div>
+{% endblock %}

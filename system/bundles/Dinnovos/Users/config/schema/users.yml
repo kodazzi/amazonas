@@ -1,0 +1,19 @@
+User:
+  options:
+    table: users
+    timestampable: true
+  fields:
+    id					    : {type: primary, strategy: identity}
+    first_name			    : {type: string, length: 255, notnull: false}
+    last_name		        : {type: string, length: 255, notnull: false}
+    email				    : {type: email, length: 100, unique: true}
+    username				: {type: login, length: 100, unique: true}
+    password			    : {type: password, length: 255}
+    token_email			    : {type: string, length: 255, notnull: false}
+    token_email_created	    : {type: datetime, notnull: false}
+    token_forgotten			: {type: string, length: 255, notnull: false}
+    token_forgotten_created	: {type: datetime, notnull: false}
+    last_logging	        : {type: datetime, notnull: false}
+    accept_terms			: {type: options, values: {0: "NO", 1: "SI"}, default: 0}
+    email_confirm	        : {type: options, values: {0: "NO", 1: "SI"}, default: 0}
+    status      		    : {type: options, values: {0: Desactivo, 1: Activo, 2: Espera}, default: 2}
