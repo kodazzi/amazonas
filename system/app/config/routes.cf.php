@@ -11,6 +11,11 @@
 use Symfony\Component\Routing\Route;
 
 $routes->add(
+    'Install',
+    new Route('/', array( 'controller' => 'Dinnovos\Amazonas:Install:step1' ))
+);
+
+$routes->add(
     'homepage',
     new Route('/', array( 'controller' => 'Dinnovos\Amazonas:Home:index' ))
 );
