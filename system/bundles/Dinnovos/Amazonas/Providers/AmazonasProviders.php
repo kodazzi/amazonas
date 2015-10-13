@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * This file is part of the Kodazzi Framework.
  *
  * (c) Jorge Gaitan <jgaitan@kodazzi.com>
@@ -31,7 +31,7 @@ class AmazonasProviders implements ServiceProviderInterface
     {
         Alias::set('Page', 'Dinnovos\Amazonas\Services\PageService');
         Alias::set('Post', 'Dinnovos\Amazonas\Services\PostService');
-        Alias::set('Block', 'Dinnovos\Amazonas\Services\BlockService');
+        Alias::set('Slab', 'Dinnovos\Amazonas\Services\SlabService');
         Alias::set('Carousel', 'Dinnovos\Amazonas\Services\CarouselService');
         Alias::set('Settings', 'Dinnovos\Amazonas\Services\SettingsService');
     }
@@ -42,8 +42,8 @@ class AmazonasProviders implements ServiceProviderInterface
             return \Page::showContent($where);
         });
 
-        \Service::get('view')->addFunction('block', function($where = array()){
-            return \Block::showContent($where);
+        \Service::get('view')->addFunction('slab', function($where = array()){
+            return \Slab::showContent($where);
         });
 
         \Service::get('view')->addFunction('carousel', function($where = array()){

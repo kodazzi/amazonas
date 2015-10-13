@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * This file is part of the Yulois Framework.
  *
  * (c) Jorge Gaitan <info.yulois@gmail.com>
@@ -10,7 +10,7 @@
 
 namespace Dinnovos\Amazonas\Services;
 
-class BlockService
+class SlabService
 {
     static protected $model = 'Dinnovos\Amazonas\Models\BlockModel';
 
@@ -18,17 +18,17 @@ class BlockService
     {
         if(is_string($where))
         {
-            $where = array('mark'=>$where);
+            $where = array('label'=>$where);
         }
 
-        return self::_block($where, $fields, $typeFetch, $order);
+        return;
     }
 
     static public function showContent($where = array())
     {
         if(is_string($where))
         {
-            $where = array('label'=>$where);
+            $where = array('a.label' => $where);
         }
 
         $block = self::_block($where);
@@ -44,6 +44,6 @@ class BlockService
     // ------------
     static private function _block($where = array(), $fields = '*', $typeFetch = \PDO::FETCH_CLASS, $order = null)
     {
-        return \Service::get('db')->model(self::$model)->fetch($where, $fields, $typeFetch, $order);
+        return \Service::get('db')->model(self::$model)->getTranslation('es')->fetch($where, $fields, $typeFetch, $order);
     }
 }

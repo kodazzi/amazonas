@@ -28,7 +28,7 @@ class CarouselService
 
         if($carousel)
         {
-            $slides = \Service::get('db')->model(self::$modelSlides)->fetchAll(array('carousel_id'=>$carousel->id), 't.*', \PDO::FETCH_CLASS, array('sequence'=>'ASC'));
+            $slides = \Service::get('db')->model(self::$modelSlides)->getTranslation('es')->fetchAll(array('a.carousel_id'=>$carousel->id), '*', \PDO::FETCH_CLASS, array('sequence'=>'ASC'));
 
             return \Service::get('view')->render('Dinnovos\Amazonas:Carousels:carousel', array(
                 'carousel'  => $carousel,
